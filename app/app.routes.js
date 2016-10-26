@@ -15,6 +15,21 @@
       .when('/', {
         redirectTo: '/'
       })
+      .when('/alunos', {
+        templateUrl: 'app/alunos/alunos.html',
+        controller: 'AlunosController',
+        controllerAs: 'alunos'
+      })
+      .when('/aluno', {
+        templateUrl: 'app/alunos/aluno.html',
+        controller: 'AlunoController',
+        controllerAs: 'aluno'
+      })
+      .when('/aluno/:idAluno', {
+        templateUrl: 'app/alunos/aluno.html',
+        controller: 'AlunoController',
+        controllerAs: 'aluno'
+      })
       .otherwise({ redirectTo: '/' });
   }
 } ());
