@@ -6,7 +6,7 @@
 <html class="ie ie8 no-js" lang="pt-BR" ng-app="dashboard" ng-controller="MainController as Main">
 <![endif]-->
 <!--[if !(IE 7) & !(IE 8)]><!-->
-<html lang="pt-br" ng-app="dashboard"  class="no-js" ng-controller="MainController as Main">
+<html lang="pt-br" ng-app="dashboard" class="no-js" ng-controller="MainController as Main">
 <!--<![endif]-->
 
 <head>
@@ -17,7 +17,7 @@
 	<meta name="fragment" content="!">
 
 	<base href="/gde/">
-  
+
 	<script src="https://cdn.jsdelivr.net/jquery/2.2.1/jquery.min.js"></script>
 	<!--ANGULAR-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
@@ -27,11 +27,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.min.js"></script>
 	<!--NG MASK-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
+	<!--TOAST-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.1.1/angular-toastr.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.1.1/angular-toastr.tpls.js"></script>
 
-	<title>Dashboard</title>
+	<title ng-bind="'Dashboard ' + $root.title">Dashboard</title>
 
 	<!--CSS SITE-->
-	<!--<link rel="stylesheet" href="css/style.min.css">-->
+	<link rel="stylesheet" href="css/style.min.css">
 
 	<!--[if lt IE 9]>
   <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
