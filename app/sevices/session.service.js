@@ -8,10 +8,10 @@
   session.$inject = ['$rootScope'];
   function session($rootScope) {
     var padrao = {
-      id: '577ffe27e371b996be608a62',
-      listaAlunos: [],
-      listaTurmas: [],
-      listaProf: []
+      id: '577ffe27e371b996be608a62', // escola de exemplo.
+      listaAlunos: null,
+      listaTurmas: null,
+      listaProf: null
     };
 
     var service = {

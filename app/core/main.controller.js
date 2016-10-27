@@ -8,8 +8,7 @@
   MainController.$inject = ['serverService'];
 
   function MainController(serverService) {
-    var vm = this;
-
+    var self = this;
 
     Activate();
 

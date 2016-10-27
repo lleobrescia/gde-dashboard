@@ -1,7 +1,5 @@
 <div ng-hide="alunos.isEditing">
-	<p ng-repeat="(key, value) in alunos.listaAlunos" >
-		 <a ng-href="">{{value.Nome}}</a>
+	<p ng-repeat="(key, value) in alunos.listaAlunos | orderBy:'Nome'">
+		<a ng-href="">{{value.Nome}}</a>
 	</p>
 </div>
-
-<div ng-include src="'app/alunos/aluno.html'" ng-show="alunos.isEditing"></div>
