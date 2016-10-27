@@ -6,6 +6,12 @@
     .controller('AlunoController', AlunoController);
 
   AlunoController.$inject = ['$routeParams', 'serverService', 'session', 'toastr'];
+
+  /**
+  * @namespace AlunoController
+  * @desc Adiciona e edita informacoes de um aluno
+  * @memberOf Controllers
+  */
   function AlunoController($routeParams, serverService, session, toastr) {
     var self = this;
     var idEscola = session.user.id;
@@ -94,11 +100,11 @@
     * @memberOf Controllers.AlunoController
     */
     function CancelarEdicao() {
-      self.aluno.Data_Nascimento = self.dataNascimento;
-      self.aluno.Email_Responsavel = self.emailResponsavel;
-      self.aluno.Sexo = self.genero;
-      self.aluno.Matricula = self.matricula;
-      self.aluno.Nome = self.nome;
+      self.dataNascimento = self.aluno.Data_Nascimento;
+      self.emailResponsavel = self.aluno.Email_Responsavel;
+      self.genero = self.aluno.Sexo;
+      self.matricula = self.aluno.Matricula;
+      self.nome = self.aluno.Nome;
     }
 
     /**
@@ -124,11 +130,7 @@
         } else {
           self.carregando = false;
 
-          self.dataNascimento = self.aluno.Data_Nascimento;
-          self.emailResponsavel = self.aluno.Email_Responsavel;
-          self.genero = self.aluno.Sexo;
-          self.matricula = self.aluno.Matricula;
-          self.nome = self.aluno.Nome;
+          CancelarEdicao();
         }
         console.log(self.aluno);
       });
