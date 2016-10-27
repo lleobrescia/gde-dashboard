@@ -18,17 +18,20 @@
       .when('/alunos', {
         templateUrl: 'app/alunos/alunos.html',
         controller: 'AlunosController',
-        controllerAs: 'alunos'
+        controllerAs: 'alunos',
+        title: '- Lista de Alunos'
       })
       .when('/aluno', {
         templateUrl: 'app/alunos/aluno.html',
         controller: 'AlunoController',
-        controllerAs: 'aluno'
+        controllerAs: 'aluno',
+        title: '- Adicionar Aluno'
       })
       .when('/aluno/:idAluno', {
         templateUrl: 'app/alunos/aluno.html',
         controller: 'AlunoController',
-        controllerAs: 'aluno'
+        controllerAs: 'aluno',
+        title: '- Informações Sobre Aluno'
       })
       .otherwise({ redirectTo: '/' });
   }
