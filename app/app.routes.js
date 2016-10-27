@@ -33,6 +33,24 @@
         controllerAs: 'aluno',
         title: '- Informações Sobre Aluno'
       })
+      .when('/professores', {
+        templateUrl: 'app/professores/professores.html',
+        controller: 'ProfessoresController',
+        controllerAs: 'profs',
+        title: '- Lista de Professores'
+      })
+      .when('/professor', {
+        templateUrl: 'app/professores/professor.html',
+        controller: 'ProfessorController',
+        controllerAs: 'prof',
+        title: '- Adicionar Professor'
+      })
+      .when('/professor/:idProf', {
+        templateUrl: 'app/professores/professor.html',
+        controller: 'ProfessorController',
+        controllerAs: 'prof',
+        title: '- Informações Sobre Professor'
+      })
       .otherwise({ redirectTo: '/' });
   }
 } ());
