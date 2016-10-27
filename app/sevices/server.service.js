@@ -32,6 +32,15 @@
     * @desc Envia o endpoint e o json da requisicao para a funcao SendData
     * @param {String} endpoint - endpoint do servico que deseja acessar
     * @param {Json} json - request Json body
+    * @example <caption>Exemplo de utilização</caption>,
+    * var endpoint = 'RecuperarDadosAlunosEscola';
+    * var josonRequest = {
+    *     'ObjectID': '',
+    *     'Id_Escola': idEscola
+    *   };
+    * serverService.Request(endpoint, josonRequest).then(function (resp) {
+		*	 self.listaAlunos = JSON.parse(resp);
+		* });
     * @return {Promise}
     * @memberOf Services.serverService
     */
@@ -52,7 +61,7 @@
         deferred.reject(arguments);
       });
 
-       return deferred.promise;
+      return deferred.promise;
     }
 
     /**
@@ -64,7 +73,7 @@
     */
     function SendData(Data) {
       var call = $.ajax({
-        type      : 'POST',
+        type        : 'POST',
         url         : 'http://52.23.250.176/webservice/web/service_request.aspx',
         contentType : 'text/json; charset=utf-8',
         data        : Data,
