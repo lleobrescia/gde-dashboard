@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default navbar-static-top" ng-controller="HeaderController as Header">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="">Nome da Escola</a>
+	</div>
+	<!--navbar-header-->
+	<ul class="nav navbar-top-links navbar-right">
+		<li>
+			<a href="#">
+        Nome do Usuario
+			</a>
+		</li>
+		<li>
+			<a href="#">
+        sair
+			</a>
+		</li>
+	</ul>
+	<!--navbar-top-links-->
+	<div class="navbar-default sidebar" role="navigation">
+		<div class="sidebar-nav navbar-collapse">
+			<ul class="nav in">
+				<li>
+					<a href="" class="active" ng-class="{ active: isActive('/')}"> Inicio</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/alunos')}"> Alunos</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/turmas')}"> Turmas</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/professores')}"> Professores</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/pedagogico')}"> Pedagógico</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/cardapio')}"> Cardápio</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/atividades')}"> Atividades</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/comunicacao')}"> Comunicação</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/usuarios')}"> Usuários</a>
+				</li>
+				<li>
+					<a href="" ng-class="{ active: isActive('/dados-escola')}"> Dados da Escola</a>
+				</li>
+			</ul>
+		</div>
+		<!--sidebar-nav-->
+	</div>
+	<!--sidebar-->
+</nav>
+<div class="desenvolvedor">
+	<img src="image/nota-anota.png" alt="Nota e Anota">
+
+	<a href="http://pixla.com.br/" target="_blank" title="Pixla">Pixla | 2016</a>
+</div>
+<!--desenvolvedor-->
