@@ -45,10 +45,13 @@
 
 <body>
 
-	<section>
-		<div ng-view autoscroll="true"></div>
-
-	</section>
+	<div class="wrapper">
+		<cabecalho></cabecalho>
+		<section class="page-wrapper">
+			<div ng-view autoscroll="true"></div>
+		</section>
+	</div>
+	<!--wrapper-->
 
 	<script src="js/dashboard.min.js"></script>
 
