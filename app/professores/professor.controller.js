@@ -43,7 +43,7 @@
     * @memberOf Controllers.ProfessorController
     */
     function Activate() {
-      idProf = $routeParams.idAluno;
+      idProf = $routeParams.idProf;
 
       if (idProf !== undefined) {
         GetProf();
