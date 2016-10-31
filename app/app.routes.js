@@ -51,6 +51,24 @@
         controllerAs: 'prof',
         title: '- Informações Sobre Professor'
       })
+      .when('/turmas', {
+        templateUrl: 'app/turmas/turmas.html',
+        controller: 'TurmasController',
+        controllerAs: 'turmas',
+        title: '- Lista de Turmas'
+      })
+      .when('/turma', {
+        templateUrl: 'app/turmas/turma.html',
+        controller: 'TurmaController',
+        controllerAs: 'turma',
+        title: '- Adicionar Turma'
+      })
+      .when('/turmas/:idTurma', {
+        templateUrl: 'app/turmas/turma.html',
+        controller: 'TurmaController',
+        controllerAs: 'turma',
+        title: '- Informações Sobre Turma'
+      })
       .otherwise({ redirectTo: '/' });
   }
 } ());
