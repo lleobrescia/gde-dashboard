@@ -33,3 +33,8 @@
   background: linear-gradient(180deg, #78d280 0, #78d280 3%, #78d280 8%, #78d280);
   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#78d280', endColorstr='#78d280', GradientType=0)
 }
+
+.aluno-hearder .input-title input {
+  font-size: 2.4em;
+  min-height: 51px;
+}

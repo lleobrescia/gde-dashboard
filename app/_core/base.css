@@ -206,7 +206,7 @@ p {
 
 /*FORMULARIO*/
 
-.form-group label {
+.form-group label, .form-group label a {
   font-weight: 800;
   font-family: Open Sans, sans-serif;
   font-size: 1.2em;

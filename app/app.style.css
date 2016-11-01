@@ -34,6 +34,10 @@ body {
   padding: 0 15px;
 }
 
+.toast-message {
+  font-size: 1.6em
+}
+
 @media (min-width: 768px) {
   .page-wrapper {
     position: inherit;

@@ -9,14 +9,14 @@
     .module('dashboard')
     .controller('AlunosController', AlunosController);
 
-  AlunosController.$inject = ['serverService', 'session', '$location'];
+  AlunosController.$inject = ['serverService', 'session', '$location', '$routeParams', 'toastr'];
 
   /**
   * @namespace AlunosController
   * @desc Gerencia os dados dos alunos
   * @memberOf Controllers
   */
-  function AlunosController(serverService, session, $location) {
+  function AlunosController(serverService, session, $location, $routeParams, toastr) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
 
@@ -43,6 +43,10 @@
       //   self.listaAlunos = session.user.listaAlunos;
       // }
       // self.carregando = false;
+
+      if ($routeParams.cadastro === 'OK') {
+        toastr.success('Aluno Adicionado');
+      }
     }
 
     /**

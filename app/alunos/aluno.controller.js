@@ -9,14 +9,14 @@
     .module('dashboard')
     .controller('AlunoController', AlunoController);
 
-  AlunoController.$inject = ['$routeParams', 'serverService', 'session', 'toastr'];
+  AlunoController.$inject = ['$routeParams', 'serverService', 'session', 'toastr', '$location'];
 
   /**
   * @namespace AlunoController
   * @desc Adiciona e edita informacoes de um aluno
   * @memberOf Controllers
   */
-  function AlunoController($routeParams, serverService, session, toastr) {
+  function AlunoController($routeParams, serverService, session, toastr, $location) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
     var idAluno = null;
@@ -53,26 +53,6 @@
     }
 
     /**
-    * @namespace AtualizarListaAlunos
-    * @desc Atualiza a lista dos alunos casa haja modificacao em algum aluno
-    * @memberOf Controllers.AlunoController
-    */
-    function AtualizarListaAlunos() {
-      var endpoint = 'RecuperarDadosAlunosEscola';
-      var josonRequest = {
-        'ObjectID': '',
-        'Id_Escola': idEscola
-      };
-
-      serverService.Request(endpoint, josonRequest).then(function (resp) {
-        session.user.listaAlunos = JSON.parse(resp);
-        session.SaveState();
-
-        self.carregando = false;
-      });
-    }
-
-    /**
     * @namespace AdicionarAluno
     * @desc Adiciona o aluno e envia a senha para o responsavel
     * @memberOf Controllers.AlunoController
@@ -93,8 +73,7 @@
       self.carregando = true;
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
-        toastr.success('Aluno Adicionado');
-        AtualizarListaAlunos();
+        $location.url('/alunos?cadastro=OK');
       });
     }
 
