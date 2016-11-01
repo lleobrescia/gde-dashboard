@@ -31,6 +31,13 @@ body {
 
 .page-wrapper {
   position: inherit;
-  margin: 0 0 0 250px;
-  padding: 0 20px;
+  padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+  .page-wrapper {
+    position: inherit;
+    margin: 0 0 0 250px;
+    padding: 0 20px;
+  }
 }

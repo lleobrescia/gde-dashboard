@@ -29,18 +29,12 @@
   color: #242424
 }
 
-.sidebar {
-  z-index: 1;
-  position: absolute;
-  width: 250px;
-  margin-top: 71px;
-}
-
 .sidebar a {
   font-family: 'Open Sans', sans-serif;
   color: #239fdb;
   font-size: 1.4em;
   border-radius: 5px;
+  text-align: center;
 }
 
 .sidebar .nav {
@@ -72,4 +66,14 @@
   display: block;
   text-align: center;
   margin-top: 42px;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    z-index: 1;
+    position: absolute;
+    width: 250px;
+    margin-top: 71px;
+    text-align: left;
+  }
 }
