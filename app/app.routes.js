@@ -12,8 +12,8 @@
     $locationProvider.html5Mode(true);
 
     $routeProvider
-      .when('/', {
-        redirectTo: '/'
+      .when('/home', {
+        templateUrl: 'app/core/home.html'
       })
       .when('/alunos', {
         templateUrl: 'app/alunos/alunos.html',
