@@ -41,3 +41,10 @@ body {
     padding: 0 20px;
   }
 }
+
+@media (min-width: 1500px) {
+  .page-wrapper {
+    margin: 0 0 0 370px;
+    padding: 0 20px;
+  }
+}

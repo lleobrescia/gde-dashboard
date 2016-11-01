@@ -74,6 +74,8 @@
     position: absolute;
     width: 250px;
     margin-top: 71px;
+  }
+  .sidebar a {
     text-align: left;
   }
 }
