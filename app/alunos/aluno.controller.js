@@ -1,3 +1,7 @@
+/**
+* Aluno Controller
+* @namespace Controllers
+*/
 (function () {
   'use strict';
 
@@ -14,7 +18,7 @@
   */
   function AlunoController($routeParams, serverService, session, toastr) {
     var self = this;
-    var idEscola = session.user.id;
+    var idEscola = '577ffe27e371b996be608a62';
     var idAluno = null;
 
     self.aluno = [];
