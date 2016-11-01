@@ -1,7 +1,8 @@
+@import url('https://cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.min.css');
 @import url('https://cdn.jsdelivr.net/normalize/3.0.3/normalize.min.css');
 @import url('https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.1.1/angular-toastr.min.css');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800');
 
 /**
 * GERAL
@@ -21,10 +22,8 @@ html {
 body {
   /*config para usar em no lugar de px*/
   font-size: 62.5%;
+  font-family: Open Sans, sans-serif;
 }
-
-
-/*BASE*/
 
 .wrapper {
   width: 100%
