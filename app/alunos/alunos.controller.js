@@ -9,21 +9,22 @@
     .module('dashboard')
     .controller('AlunosController', AlunosController);
 
-  AlunosController.$inject = ['serverService', 'session'];
+  AlunosController.$inject = ['serverService', 'session', '$location'];
 
   /**
   * @namespace AlunosController
   * @desc Gerencia os dados dos alunos
   * @memberOf Controllers
   */
-  function AlunosController(serverService, session) {
+  function AlunosController(serverService, session, $location) {
     var self = this;
-    var idEscola = session.user.id;
+    var idEscola = '577ffe27e371b996be608a62';
 
     self.carregando = true;
     self.listaAlunos = [];
 
     self.ApagarAluno = ApagarAluno;
+    self.GoToAluno = GoToAluno;
 
     Activate();
 
@@ -35,12 +36,13 @@
     * @memberOf Controllers.AlunosController
     */
     function Activate() {
-      if (session.user.listaAlunos === null) {
-        GetAlunos();
-      } else {
-        self.listaAlunos = session.user.listaAlunos;
-      }
-      self.carregando = false;
+      GetAlunos();
+      // if (session.user.listaAlunos === null) {
+      //   GetAlunos();
+      // } else {
+      //   self.listaAlunos = session.user.listaAlunos;
+      // }
+      // self.carregando = false;
     }
 
     /**
@@ -87,11 +89,22 @@
 				 * Eh preciso passar para json object
 				 */
         self.listaAlunos = JSON.parse(resp);
+        console.log(self.listaAlunos);
 
-        session.user.listaAlunos = self.listaAlunos;
+        // session.user.listaAlunos = self.listaAlunos;
 
-        session.SaveState();
+        // session.SaveState();
       });
+    }
+
+    /**
+		* @namespace GoToAluno
+		* @desc Direciona o usuario para a pagina do aluno solicitado
+    * @param {string} alunoId - id do aluno para puxar as informacoes dele
+		* @memberOf Controllers.AlunosController
+		*/
+    function GoToAluno(idAluno) {
+      $location.path('aluno/' + idAluno); // path not hash
     }
   }
 })();
