@@ -89,7 +89,6 @@
 				 * Eh preciso passar para json object
 				 */
         self.listaAlunos = JSON.parse(resp);
-        console.log(self.listaAlunos);
 
         // session.user.listaAlunos = self.listaAlunos;
 
