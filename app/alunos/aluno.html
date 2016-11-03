@@ -1,60 +1,6 @@
-<div class="row aluno-hearder">
-	<div class="col-xs-12">
-		<div class="form-group input-group input-title">
-			<label><a href="alunos" rel="prev" title="Voltar">Alunos</a></label>
-			<input type="text" class="form-control" name="nome" placeholder="Nome do(a) Aluno(a)" ng-model="aluno.nome" required>
-			<span class="input-group-btn">
-				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.AdicionarAluno()" ng-disabled="adicionarForm.$invalid">
-					Salvar
-				</button>
-			</span>
-		</div>
-		<!--form-group-->
-	</div>
-	<!--col xs 12-->
+<div class="carregando" ng-show="aluno.carregando">
+	<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+	<span class="sr-only">Carregando...</span>
 </div>
-<!--row-->
-
-<div class="row">
-	<div class="col-xs-12">
-		<h2 class="page-header">
-			Dados da matrícula
-		</h2>
-	</div>
-	<!--col-xs-12-->
-
-	<form name="adicionarForm">
-		<div class="col-sm-6 col-md-3">
-			<div class="form-group">
-				<label for="nascimento">Data de Nascimento</label>
-				<input type="text" name="nascimento" class="form-control" ng-model="aluno.dataNascimento" mask="39/19/9999" required>
-			</div>
-			<!--form-group-->
-		</div>
-		<!--col-sm-3-->
-		<div class="col-sm-6 col-md-4">
-			<div class="form-group">
-				<label for="email">E-mail do responsável</label>
-				<input type="email" name="email" class="form-control" ng-model="aluno.emailResponsavel" required>
-			</div>
-		</div>
-		<!--col-sm-4-->
-		<div class="col-sm-6 col-md-2">
-			<div class="form-group">
-				<label for="genero">Gênero</label>
-				<select name="genero" class="form-control" ng-model="aluno.genero" required>
-					<option value="F">Feminino</option>
-					<option value="M">Masculino</option>
-				</select>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-3">
-			<div class="form-group">
-				<label for="matricula">Matrícula</label>
-				<input type="text" name="matricula" class="form-control" ng-model="aluno.matricula" required>
-			</div>
-		</div>
-	</form>
-	<!--adicionarForm-->
-</div>
-<!--row-->
+<div ng-include="'app/alunos/editar.html'" ng-show="aluno.editionEnable && !aluno.carregando" ng-cloak></div>
+<div ng-include="'app/alunos/visualizar.html'" ng-hide="aluno.editionEnable && !aluno.carregando" ng-cloak></div>
