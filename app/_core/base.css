@@ -114,6 +114,14 @@
   background: #239fdb !important;
 }
 
+.btn-danger.btn-outline {
+  color: #d43f3a !important;
+}
+
+.btn-danger.btn-outline:hover {
+  background: #d43f3a !important;
+}
+
 .btn-primary.btn-outline:hover, .btn-success.btn-outline:hover, .btn-info.btn-outline:hover, .btn-warning.btn-outline:hover, .btn-danger.btn-outline:hover {
   color: white !important;
 }
@@ -148,6 +156,15 @@
 
 .thumbnail-user i {
   margin: auto;
+}
+
+.thumbnail-box-lg, .thumbnail-user-lg {
+  width: 300px !important;
+  height: 300px !important;
+}
+
+.thumbnail-user-lg {
+  font-size: 20em;
 }
 
 
@@ -190,6 +207,11 @@ p {
   margin: 10px 0 20px
 }
 
+.page-header + .input-group-btn {
+  vertical-align: bottom;
+  bottom: 25px;
+}
+
 .page-header .btn:first-child {
   margin-left: 30px;
 }
@@ -220,6 +242,14 @@ p {
   padding-top: 0;
 }
 
+.input-title {
+  width: 100%;
+}
+
+.input-title .input-group-btn {
+  vertical-align: bottom;
+}
+
 .input-title input, .input-title input:focus {
   border: none;
   box-shadow: none;
@@ -228,8 +258,11 @@ p {
 }
 
 .input-title .input-group-btn:last-child>.btn {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-radius: 4px !important;
+}
+
+.input-title .input-group-btn:last-child>.btn + .btn {
+  margin-left: 10px;
 }
 
 
@@ -237,6 +270,10 @@ p {
 
 .table.table-striped tbody tr:hover {
   background: #239fdb;
+  color: white;
+}
+
+.table.table-striped tbody tr:hover > td h3{
   color: white;
 }
 
