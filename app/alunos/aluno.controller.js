@@ -19,13 +19,14 @@
   function AlunoController($routeParams, serverService, session, toastr, $location) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
-    var idAluno = null;
 
     self.aluno = [];
     self.carregando = true;
     self.dataNascimento = '';
+    self.editionEnable = true;
     self.emailResponsavel = '';
     self.genero = '';
+    self.idAluno = null;
     self.matricula = '';
     self.nome = '';
 
@@ -43,13 +44,14 @@
     * @memberOf Controllers.AlunoController
     */
     function Activate() {
-      idAluno = $routeParams.idAluno;
+      self.idAluno = $routeParams.idAluno;
 
-      if (idAluno !== undefined) {
+      if (self.idAluno !== undefined) {
+        self.editionEnable = false;
         GetAluno();
+      } else {
+        self.carregando = false;
       }
-
-      console.log(idAluno);
     }
 
     /**
@@ -71,6 +73,17 @@
       };
 
       self.carregando = true;
+
+      if (self.dataNascimento === '' ||
+        self.emailResponsavel === '' ||
+        self.matricula === '' ||
+        self.nome === '' ||
+        self.genero === '') {
+
+        toastr.error('Por favor, preencha todos os campos', 'Erro no Cadastro!');
+        self.carregando = false;
+        return;
+      }
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
         $location.url('/alunos?cadastro=OK');
@@ -98,7 +111,7 @@
     function GetAluno() {
       var endpoint = 'RecuperarDadosAlunosEscola';
       var josonRequest = {
-        'ObjectID': idAluno,
+        'ObjectID': self.idAluno,
         'Id_Escola': idEscola
       };
 
@@ -152,11 +165,11 @@
         'TelefoneResponsavelEmergencia': self.aluno.TelefoneResponsavelEmergencia,
         'Telefone_Resp1': self.aluno.Telefone_Resp1,
         'Telefone_Resp2': self.aluno.Telefone_Resp2,
-        'Data_Nascimento': self.dataNascimento.Data_Nascimento,
-        'Email_Responsavel': self.emailResponsavel.Email_Responsavel,
-        'Matricula': self.matricula.Matricula,
-        'Nome': self.nome.Nome,
-        'Sexo': self.gener.Sexoo
+        'Data_Nascimento': self.dataNascimento,
+        'Email_Responsavel': self.emailResponsavel,
+        'Matricula': self.matricula,
+        'Nome': self.nome,
+        'Sexo': self.genero
       };
       var josonRequest = 'AtualizarDadosAluno';
 
