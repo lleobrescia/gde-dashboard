@@ -1,5 +1,9 @@
 /*CABECALHO*/
 
+.navbar-static-top {
+  z-index: 2
+}
+
 .navbar-default {
   background-color: white;
   border-color: #d8d8d8;
