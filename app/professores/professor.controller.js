@@ -18,7 +18,7 @@
   */
   function ProfessorController($routeParams, serverService, session, toastr) {
     var self = this;
-    var idEscola = session.user.id;
+    var idEscola = '577ffe27e371b996be608a62';
     var idProf = null;
 
     self.carregando = true;
@@ -65,9 +65,9 @@
       };
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
-        session.user.listaProf = JSON.parse(resp);
+        // session.user.listaProf = JSON.parse(resp);
 
-        session.SaveState();
+        // session.SaveState();
       });
     }
 
@@ -130,7 +130,7 @@
           CancelarEdicao();
         }
 
-        session.SaveState();
+        // session.SaveState();
       });
     }
 

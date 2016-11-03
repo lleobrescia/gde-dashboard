@@ -9,19 +9,21 @@
     .module('dashboard')
     .controller('ProfessoresController', ProfessoresController);
 
-  ProfessoresController.$inject = ['session', 'serverService'];
+  ProfessoresController.$inject = ['session', 'serverService', '$location'];
 
   /**
   * @namespace ProfessoresController
   * @desc Gerencia os dados dos professores
   * @memberOf Controllers
   */
-  function ProfessoresController(session, serverService) {
+  function ProfessoresController(session, serverService, $location) {
     var self = this;
-    var idEscola = session.user.id;
+    var idEscola = '577ffe27e371b996be608a62';
 
     self.carregando = true;
     self.listaProf = [];
+
+    self.GoToProf = GoToProf;
 
     Activate();
 
@@ -33,12 +35,13 @@
     * @memberOf Controllers.ProfessoresController
     */
     function Activate() {
-      if (session.user.listaProf === null) {
-        GetProfs();
-      } else {
-        self.listaProf = session.user.listaProf;
-      }
-      self.carregando = false;
+      GetProfs();
+      // if (session.user.listaProf === null) {
+      //   GetProfs();
+      // } else {
+      //   self.listaProf = session.user.listaProf;
+      // }
+      // self.carregando = false;
     }
 
     /**
@@ -55,9 +58,9 @@
       var josonRequest = 'ExcluirProfessor';
 
       self.listaProf.splice(index, 1);
-      session.user.listaProf = self.listaProf;
+      // session.user.listaProf = self.listaProf;
 
-      session.SaveState();
+      // session.SaveState();
 
       serverService.Request(endpoint, josonRequest);
     }
@@ -76,10 +79,44 @@
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
         self.listaProf = JSON.parse(resp);
-        session.user.listaProf = self.listaProf;
+        console.log(self.listaProf);
+        // session.user.listaProf = self.listaProf;
 
-        session.SaveState();
+        // session.SaveState();
+
+        //Adiciona a lista de turmas de cada prof
+        GetTurmas();
       });
+    }
+
+    /**
+		* @namespace GetTurmas
+		* @desc Pega todas as turmas do professor e adiciona a lista de professores
+		* @memberOf Controllers.ProfessoresController
+		*/
+    function GetTurmas() {
+      var endpoint = 'RetornarListaTurmasPorIdProfessor';
+
+      angular.forEach(self.listaProf, function (item) {
+        var josonRequest = {
+          'ObjectID': item.Id
+        };
+        serverService.Request(endpoint, josonRequest).then(function (resp) {
+          var lista = JSON.parse(resp);
+
+          item.turmas = lista;
+        });
+      });
+    }
+
+    /**
+		* @namespace GoToProf
+		* @desc Direciona o usuario para a pagina do aluno solicitado
+    * @param {string} idProf - id do professor para puxar as informacoes dele
+		* @memberOf Controllers.ProfessoresController
+		*/
+    function GoToProf(idProf) {
+      $location.path('professor/' + idProf);
     }
   }
 })();
