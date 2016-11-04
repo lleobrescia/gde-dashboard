@@ -9,22 +9,22 @@
     .module('dashboard')
     .controller('ProfessorController', ProfessorController);
 
-  ProfessorController.$inject = ['$routeParams', 'serverService', 'session', 'toastr'];
+  ProfessorController.$inject = ['$routeParams', 'serverService', 'session', 'toastr', '$location'];
 
   /**
   * @namespace AlunoController
   * @desc Adiciona e edita informacoes de um aluno
   * @memberOf Controllers
   */
-  function ProfessorController($routeParams, serverService, session, toastr) {
+  function ProfessorController($routeParams, serverService, session, toastr, $location) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
-    var idProf = null;
 
     self.carregando = true;
     self.cpf = '';
     self.email = '';
     self.enableEdition = false;
+    self.idProf = null;
     self.nome = '';
     self.prof = [];
     self.senha = '';
@@ -43,32 +43,13 @@
     * @memberOf Controllers.ProfessorController
     */
     function Activate() {
-      idProf = $routeParams.idProf;
+      self.idProf = $routeParams.idProf;
 
-      if (idProf !== undefined) {
+      if (self.idProf !== undefined) {
         GetProf();
       }
 
-      console.log(idProf);
-    }
-
-    /**
-    * @namespace AtualizarListaProf
-    * @desc Atualiza a lista dos professores casa haja modificacao em algum professor
-    * @memberOf Controllers.ProfessorController
-    */
-    function AtualizarListaProf() {
-      var endpoint = 'RecuperarDadosProfessoresEscola';
-      var josonRequest = {
-        'ObjectID': '',
-        'Id_Escola': idEscola
-      };
-
-      serverService.Request(endpoint, josonRequest).then(function (resp) {
-        // session.user.listaProf = JSON.parse(resp);
-
-        // session.SaveState();
-      });
+      console.log(self.idProf);
     }
 
     /**
@@ -90,8 +71,8 @@
       self.carregando = true;
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
-        toastr.success('Aluno Adicionado');
-        AtualizarListaProf();
+        console.log(resp);
+        $location.url('/professores?cadastro=OK');
       });
     }
 
@@ -104,6 +85,7 @@
       self.email = self.prof.Email;
       self.nome = self.prof.Nome;
       self.cpf = self.prof.Cpf;
+      self.senha = self.prof.Senha;
     }
 
     /**
@@ -114,7 +96,7 @@
     function GetProf() {
       var endpoint = 'RecuperarDadosProfessoresEscola';
       var josonRequest = {
-        'ObjectID': idProf,
+        'ObjectID': self.idProf,
         'Id_Escola': idEscola
       };
 
@@ -129,6 +111,7 @@
 
           CancelarEdicao();
         }
+        console.log(self.prof);
 
         // session.SaveState();
       });
@@ -143,7 +126,7 @@
       var endpoint = 'AtualizarDadosProfessor';
       var josonRequest = {
         'Email': self.email,
-        'IdGrupoUsuario': 0,
+        'IdGrupoUsuario': self.prof.IdGrupoUsuario,
         'Nome': self.nome,
         'Senha': self.senha,
         'Cpf': self.cpf,
@@ -151,6 +134,8 @@
       };
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
+        console.log(resp);
+        toastr.success('Dados Salvos!');
       });
     }
   }

@@ -27,3 +27,7 @@
 .table.table-striped tbody tr:hover p {
   color: white !important;
 }
+
+.prof-hearder input {
+  font-size: 2.4em;
+}

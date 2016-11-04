@@ -9,14 +9,14 @@
     .module('dashboard')
     .controller('ProfessoresController', ProfessoresController);
 
-  ProfessoresController.$inject = ['session', 'serverService', '$location'];
+  ProfessoresController.$inject = ['session', 'serverService', '$location', '$routeParams', 'toastr'];
 
   /**
   * @namespace ProfessoresController
   * @desc Gerencia os dados dos professores
   * @memberOf Controllers
   */
-  function ProfessoresController(session, serverService, $location) {
+  function ProfessoresController(session, serverService, $location, $routeParams, toastr) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
 
@@ -42,6 +42,11 @@
       //   self.listaProf = session.user.listaProf;
       // }
       // self.carregando = false;
+
+      //Mostra mensagem de sucesso quando adiciona um professor
+      if ($routeParams.cadastro === 'OK') {
+        toastr.success('Professor Adicionado');
+      }
     }
 
     /**
