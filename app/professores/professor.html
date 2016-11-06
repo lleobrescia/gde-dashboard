@@ -1,7 +1,7 @@
 <div class="row prof-hearder">
   <div class="col-xs-12">
     <div class="form-group input-group input-title">
-      <label><a href="professores" rel="prev" title="Voltar">Professores</a></label>
+      <label><a ui-sref="professores" rel="prev" title="Voltar">Professores</a></label>
       <input type="text" class="form-control" name="nome" placeholder="Nome do(a) Professor(a)" ng-model="prof.nome" ng-show="!prof.idProf || prof.enableEdition">
       <h1 class="page-header" ng-bind="prof.nome" ng-show="prof.idProf && !prof.enableEdition"></h1>
       <span class="input-group-btn">

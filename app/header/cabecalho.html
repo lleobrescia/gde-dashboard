@@ -26,34 +26,34 @@
 		<div class="sidebar-nav navbar-collapse collapse" aria-expanded="false">
 			<ul class="nav in">
 				<li>
-					<a href="home" ng-class="{ active: Header.IsActive('/home')}"> Inicio</a>
+					<a ui-sref="home" ng-class="{ active: Header.IsActive('home')}"> Inicio</a>
 				</li>
 				<li>
-					<a href="alunos" ng-class="{ active: Header.IsActive('/alunos') || Header.IsActive('/aluno')}"> Alunos</a>
+					<a ui-sref="alunos" ng-class="{ active: Header.IsActive('alunos')}"> Alunos</a>
 				</li>
 				<li>
-					<a href="" ng-class="{ active: Header.IsActive('/turmas')}"> Turmas</a>
+					<a ui-sref="turmas" ng-class="{ active: Header.IsActive('turmas')}"> Turmas</a>
 				</li>
 				<li>
-					<a href="professores" ng-class="{ active: Header.IsActive('/professores') || Header.IsActive('/professor')}"> Professores</a>
+					<a ui-sref="professores" ng-class="{ active: Header.IsActive('professores')}"> Professores</a>
 				</li>
 				<li>
-					<a href="" ng-class="{ active: Header.IsActive('/pedagogico')}"> Pedagógico</a>
+					<a ui-sref="pedagogico" ng-class="{ active: Header.IsActive('pedagogico')}"> Pedagógico</a>
 				</li>
 				<li>
-					<a href="" ng-class="{ active: Header.IsActive('/cardapio')}"> Cardápio</a>
+					<a ui-sref="cardapio" ng-class="{ active: Header.IsActive('cardapio')}"> Cardápio</a>
 				</li>
 				<li>
-					<a href="" ng-class="{ active: Header.IsActive('/atividades')}"> Atividades</a>
+					<a ui-sref="atividades" ng-class="{ active: Header.IsActive('atividades')}"> Atividades</a>
 				</li>
 				<li>
-					<a href="" ng-class="{ active: Header.IsActive('/comunicacao')}"> Comunicação</a>
+					<a ui-sref="comunicacao" ng-class="{ active: Header.IsActive('comunicacao')}"> Comunicação</a>
 				</li>
 				<li>
-					<a href="" ng-class="{ active: Header.IsActive('/usuarios')}"> Usuários</a>
+					<a ui-sref="usuarios" ng-class="{ active: Header.IsActive('usuarios')}"> Usuários</a>
 				</li>
 				<li>
-					<a href="" ng-class="{ active: Header.IsActive('/dados-escola')}"> Dados da Escola</a>
+					<a ui-sref="dadosDaEscola" ng-class="{ active: Header.IsActive('dados-da-escola')}"> Dados da Escola</a>
 				</li>
 			</ul>
 		</div>

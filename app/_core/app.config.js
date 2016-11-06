@@ -4,16 +4,16 @@
   angular.module('dashboard')
     .run(Run);
 
-  Run.$inject = ['$rootScope', 'session', '$route'];
+  Run.$inject = ['$rootScope', 'session', '$state'];
 
-  function Run($rootScope, session, $route) {
-    $rootScope.$on('$routeChangeSuccess', ChangeSuccess);
+  function Run($rootScope, session, $state) {
+    $rootScope.$on('$stateChangeSuccess', ChangeSuccess);
 
     function ChangeSuccess() {
       $rootScope.$broadcast('restorestate');
 
       //Change page title, based on Route information
-      $rootScope.title = $route.current.title;
+      $rootScope.title = $state.current.title;
     }
   }
 })();

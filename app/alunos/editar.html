@@ -1,7 +1,7 @@
 <div class="row aluno-hearder">
 	<div class="col-xs-12">
 		<div class="form-group input-group input-title">
-			<label><a href="alunos" rel="prev" title="Voltar">Alunos</a></label>
+			<label><a ui-sref="alunos" rel="prev" title="Voltar">Alunos</a></label>
 			<input type="text" class="form-control" name="nome" placeholder="Nome do(a) Aluno(a)" ng-model="aluno.nome">
 			<span class="input-group-btn">
 				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.AdicionarAluno()" title="Adicionar Aluno" ng-if="!aluno.idAluno">

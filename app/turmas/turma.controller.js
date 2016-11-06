@@ -5,8 +5,8 @@
     .module('dashboard')
     .controller('TurmaController', TurmaController);
 
-  TurmaController.$inject = ['$routeParams', 'serverService', 'session', 'toastr'];
-  function TurmaController($routeParams, serverService, session, toastr) {
+  TurmaController.$inject = ['serverService', 'session', 'toastr'];
+  function TurmaController(serverService, session, toastr) {
     var self = this;
 
     Activate();
