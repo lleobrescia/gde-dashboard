@@ -32,7 +32,7 @@
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
 
-        self.listaTurmas = JSON.parse(resp);
+        self.listaTurmas = resp;
 
         console.log(self.listaTurmas);
 

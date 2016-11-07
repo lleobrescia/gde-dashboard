@@ -101,8 +101,7 @@
       };
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
-        self.prof = JSON.parse(resp);
-        self.prof = self.prof[0];
+        self.prof = resp[0];
 
         if (self.prof === undefined) {
           //tratar erro

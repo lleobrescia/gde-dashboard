@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('dashboard')
-    .run(Run);
+    .run(Run)
+    .config(ConfigBlock);
 
   Run.$inject = ['$rootScope', 'session', '$state'];
 
@@ -15,5 +16,9 @@
       //Change page title, based on Route information
       $rootScope.title = $state.current.title;
     }
+  }
+
+  function ConfigBlock($httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
   }
 })();

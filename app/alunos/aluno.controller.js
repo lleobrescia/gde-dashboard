@@ -118,8 +118,7 @@
       self.carregando = true;
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
-        self.aluno = JSON.parse(resp);
-        self.aluno = self.aluno[0];
+        self.aluno = resp[0];
 
         if (self.aluno === undefined) {
           //tratar erro
