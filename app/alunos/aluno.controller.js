@@ -9,14 +9,14 @@
     .module('dashboard')
     .controller('AlunoController', AlunoController);
 
-  AlunoController.$inject = ['$routeParams', 'serverService', 'session', 'toastr', '$location'];
+  AlunoController.$inject = ['serverService', 'session', 'toastr', '$state'];
 
   /**
   * @namespace AlunoController
   * @desc Adiciona e edita informacoes de um aluno
   * @memberOf Controllers
   */
-  function AlunoController($routeParams, serverService, session, toastr, $location) {
+  function AlunoController(serverService, session, toastr, $state) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
 
@@ -44,7 +44,7 @@
     * @memberOf Controllers.AlunoController
     */
     function Activate() {
-      self.idAluno = $routeParams.idAluno;
+      self.idAluno = $state.params.idAluno;
 
       if (self.idAluno !== undefined) {
         self.editionEnable = false;
@@ -86,7 +86,7 @@
       }
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
-        $location.url('/alunos?cadastro=OK');
+        $state.go('alunos', { cadastro: 'OK' });
       });
     }
 

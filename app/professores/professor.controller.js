@@ -9,14 +9,14 @@
     .module('dashboard')
     .controller('ProfessorController', ProfessorController);
 
-  ProfessorController.$inject = ['$routeParams', 'serverService', 'session', 'toastr', '$location'];
+  ProfessorController.$inject = ['serverService', 'session', 'toastr', '$state'];
 
   /**
   * @namespace AlunoController
   * @desc Adiciona e edita informacoes de um aluno
   * @memberOf Controllers
   */
-  function ProfessorController($routeParams, serverService, session, toastr, $location) {
+  function ProfessorController(serverService, session, toastr, $state) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
 
@@ -43,7 +43,7 @@
     * @memberOf Controllers.ProfessorController
     */
     function Activate() {
-      self.idProf = $routeParams.idProf;
+      self.idProf = $state.params.idProf;
 
       if (self.idProf !== undefined) {
         GetProf();
@@ -72,7 +72,7 @@
 
       serverService.Request(endpoint, josonRequest).then(function (resp) {
         console.log(resp);
-        $location.url('/professores?cadastro=OK');
+        $state.go('professores', { cadastro: 'OK' });
       });
     }
 

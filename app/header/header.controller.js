@@ -28,8 +28,11 @@
     * @desc Verifica a pagina atual para adicionar a classe active ao menu
     * @memberOf Controllers.HeaderController
     */
+
+
     function IsActive(viewLocation) {
-      return viewLocation === $location.path();
+      var parent = $location.path().split('/');
+      return viewLocation === parent[1];
     }
   }
 })();

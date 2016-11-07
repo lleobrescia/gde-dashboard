@@ -5,70 +5,98 @@
     .module('dashboard')
     .config(RouteConfig);
 
-  RouteConfig.$inject = ['$routeProvider', '$locationProvider'];
-  function RouteConfig($routeProvider, $locationProvider) {
+  RouteConfig.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
 
-    // use the HTML5 History API
+  function RouteConfig($stateProvider, $locationProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
 
-    $routeProvider
-      .when('/home', {
-        templateUrl: 'app/core/home.html'
+    $stateProvider
+      .state('home', {
+        url: 'home',
+        cache: false,
+        templateUrl: 'paginas/menu.html',
+        controller: 'MenuController'
       })
-      .when('/alunos', {
+      .state('alunos', {
+        url: '/alunos',
+        cache: false,
+        params: {
+          cadastro: null
+        },
+        name: 'alunos',
         templateUrl: 'app/alunos/alunos.html',
         controller: 'AlunosController',
         controllerAs: 'alunos',
         title: '- Lista de Alunos'
       })
-      .when('/aluno', {
+      .state('alunosAdicionar', {
+        url: '/alunos/adicionar',
+        cache: false,
         templateUrl: 'app/alunos/aluno.html',
         controller: 'AlunoController',
         controllerAs: 'aluno',
         title: '- Adicionar Aluno'
       })
-      .when('/aluno/:idAluno', {
+      .state('alunosDetails', {
+        url: '/alunos/visualizar/:idAluno',
+        cache: false,
+        name: 'alunos',
         templateUrl: 'app/alunos/aluno.html',
         controller: 'AlunoController',
         controllerAs: 'aluno',
         title: '- Informações Sobre Aluno'
       })
-      .when('/professores', {
+      .state('professores', {
+        url: '/professores',
+        cache: false,
+        params: {
+          cadastro: null
+        },
         templateUrl: 'app/professores/professores.html',
         controller: 'ProfessoresController',
         controllerAs: 'profs',
         title: '- Lista de Professores'
       })
-      .when('/professor', {
+      .state('professoresAdicionar', {
+        url: '/professores/adicionar',
+        cache: false,
         templateUrl: 'app/professores/professor.html',
         controller: 'ProfessorController',
         controllerAs: 'prof',
         title: '- Adicionar Professor'
       })
-      .when('/professor/:idProf', {
+      .state('professoresDetails', {
+        url: '/professores/visualizar/:idProf',
+        cache: false,
         templateUrl: 'app/professores/professor.html',
         controller: 'ProfessorController',
         controllerAs: 'prof',
         title: '- Informações Sobre Professor'
       })
-      .when('/turmas', {
+      .state('turmas', {
+        url: '/turmas',
+        cache: false,
         templateUrl: 'app/turmas/turmas.html',
         controller: 'TurmasController',
         controllerAs: 'turmas',
         title: '- Lista de Turmas'
       })
-      .when('/turma', {
+      .state('turmas.adicionar', {
+        url: '/adicionar',
+        cache: false,
         templateUrl: 'app/turmas/turma.html',
         controller: 'TurmaController',
         controllerAs: 'turma',
         title: '- Adicionar Turma'
       })
-      .when('/turmas/:idTurma', {
+      .state('turmas.details', {
+        url: '/visualizar/:idTurma',
+        cache: false,
         templateUrl: 'app/turmas/turma.html',
         controller: 'TurmaController',
         controllerAs: 'turma',
         title: '- Informações Sobre Turma'
-      })
-      .otherwise({ redirectTo: '/' });
+      });
   }
-} ());
+})();
