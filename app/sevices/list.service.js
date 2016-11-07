@@ -73,9 +73,12 @@
      */
     function ToggleAll(selecedList, list) {
       if (selecedList.length === list.length) {
-        selecedList = [];
+        selecedList.splice(0, selecedList.length);
       } else if (selecedList.length === 0 || selecedList.length > 0) {
-        selecedList = list.slice(0);
+        selecedList.splice(0, selecedList.length);
+        angular.forEach(list, function (item) {
+          selecedList.push(item);
+        });
       }
     }
   }
