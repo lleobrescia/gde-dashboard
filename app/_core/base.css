@@ -106,6 +106,10 @@
   color: #5bc0de !important;
 }
 
+.btn-info.btn-outline:hover {
+  background: #5bc0de !important;
+}
+
 .btn-primary.btn-outline {
   color: #239fdb !important;
 }
@@ -124,6 +128,21 @@
 
 .btn-primary.btn-outline:hover, .btn-success.btn-outline:hover, .btn-info.btn-outline:hover, .btn-warning.btn-outline:hover, .btn-danger.btn-outline:hover {
   color: white !important;
+}
+
+.btn-switch .btn {
+  background: transparent;
+  color: #b3b3b3;
+  font-weight: 800;
+  font-size: 1.2em;
+  border-color: #bcbcbc;
+}
+
+.btn-switch .btn.active {
+  box-shadow: none;
+  border-color: #239fdb;
+  background: #239fdb;
+  color: white;
 }
 
 
@@ -273,7 +292,7 @@ p {
   color: white;
 }
 
-.table.table-striped tbody tr:hover > td h3{
+.table.table-striped tbody tr:hover > td h3 {
   color: white;
 }
 

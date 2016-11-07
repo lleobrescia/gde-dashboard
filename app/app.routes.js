@@ -97,6 +97,14 @@
         controller: 'TurmaController',
         controllerAs: 'turma',
         title: '- Informações Sobre Turma'
+      })
+      .state('comunicacao', {
+        url: '/comunicacao',
+        cache: false,
+        templateUrl: 'app/comunicacao/comunicacao.html',
+        controller: 'ComunicacaoController',
+        controllerAs: 'comunicacao',
+        title: '- Comunicação'
       });
   }
 })();
