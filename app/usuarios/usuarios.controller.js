@@ -5,8 +5,8 @@
     .module('dashboard')
     .controller('UsuariosController', UsuariosController);
 
-  UsuariosController.$inject = ['serverService', 'toastr', 'ListManagerService'];
-  function UsuariosController(serverService, toastr, ListManagerService) {
+  UsuariosController.$inject = ['serverService', 'toastr', 'ListManagerService','$stateParams'];
+  function UsuariosController(serverService, toastr, ListManagerService,$stateParams) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
 
@@ -26,6 +26,9 @@
     ////////////////
 
     function Activate() {
+      if ($stateParams.cadastro === 'OK') {
+        toastr.success('Professor Adicionado');
+      }
       GetUsuarios();
     }
 

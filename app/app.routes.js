@@ -109,10 +109,29 @@
       .state('usuarios', {
         url: '/usuarios',
         cache: false,
+        params: {
+          cadastro: null
+        },
         templateUrl: 'app/usuarios/usuarios.html',
         controller: 'UsuariosController',
         controllerAs: 'usuarios',
         title: '- Usuários'
+      })
+      .state('usuarioAdicionar', {
+        url: '/usuarios/adicionar',
+        cache: false,
+        templateUrl: 'app/usuarios/usuario.html',
+        controller: 'UsuarioController',
+        controllerAs: 'usuario',
+        title: '- Adicionar Usuário'
+      })
+      .state('usuarioDetails', {
+        url: '/usuarios/visualizar/:idUsuario',
+        cache: false,
+        templateUrl: 'app/usuarios/usuario.html',
+        controller: 'UsuarioController',
+        controllerAs: 'usuario',
+        title: '- Informações Usuário'
       });
   }
 })();

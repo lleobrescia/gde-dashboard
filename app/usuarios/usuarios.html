@@ -2,7 +2,7 @@
   <div class="col-xs-12">
     <h1 class="page-header">
       Usuários
-      <a class="btn btn-outline btn-primary" title="Adicionar Usuário" href="turma">
+      <a class="btn btn-outline btn-primary" title="Adicionar Usuário" ui-sref="usuarioAdicionar">
         <i class="fa fa-user-plus" aria-hidden="true"></i>
       </a>
       <button class="btn btn-outline btn-danger" type="button" ng-click="usuarios.DeleteUsuario()" title="Apagar Usuário(s)" ng-show="usuarios.usuariosSelecionados.length > 0">
@@ -53,7 +53,7 @@
               </p>
             </td>
             <td>
-              <a ng-bind="usuario.Nome" title="Editar" ui-sref="usuario( { idUsuario: usuario.Id })" style="cursor: pointer;"></a>
+              <a ng-bind="usuario.Nome" title="Editar" ui-sref="usuarioDetails( { idUsuario: usuario.Id })" style="cursor: pointer;"></a>
             </td>
             <td>
               <p ng-bind="usuario.Email"></p>
