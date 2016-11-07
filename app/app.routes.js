@@ -105,6 +105,14 @@
         controller: 'ComunicacaoController',
         controllerAs: 'comunicacao',
         title: '- Comunicação'
+      })
+      .state('usuarios', {
+        url: '/usuarios',
+        cache: false,
+        templateUrl: 'app/usuarios/usuarios.html',
+        controller: 'UsuariosController',
+        controllerAs: 'usuarios',
+        title: '- Usuários'
       });
   }
 })();

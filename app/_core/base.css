@@ -292,7 +292,16 @@ p {
   color: white;
 }
 
-.table.table-striped tbody tr:hover > td h3 {
+.table-striped p {
+  margin: 0
+}
+
+.table-striped a {
+  font-size: 1.4em;
+  color: #000;
+}
+
+.table.table-striped tbody tr:hover > td h3, .table.table-striped tbody tr:hover > td a {
   color: white;
 }
 
