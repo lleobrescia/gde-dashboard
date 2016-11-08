@@ -132,6 +132,33 @@
         controller: 'UsuarioController',
         controllerAs: 'usuario',
         title: '- Informações Usuário'
+      })
+      .state('cardapio', {
+        url: '/cardapio',
+        cache: false,
+        params: {
+          cadastro: null
+        },
+        templateUrl: 'app/cardapio/cardapios.html',
+        controller: 'CardapiosController',
+        controllerAs: 'cardapios',
+        title: '- Cardápio'
+      })
+      .state('cardapioAdicionar', {
+        url: '/cardapio/adicionar',
+        cache: false,
+        templateUrl: 'app/cardapio/cardapio.html',
+        controller: 'CardapioController',
+        controllerAs: 'cardapio',
+        title: '- Adicionar Cardápio'
+      })
+      .state('cardapioDetails', {
+        url: '/cardapio/visualizar/:idCardapio',
+        cache: false,
+        templateUrl: 'app/cardapio/cardapio.html',
+        controller: 'CardapioController',
+        controllerAs: 'cardapio',
+        title: '- Informações Cardápio'
       });
   }
 })();

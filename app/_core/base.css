@@ -305,6 +305,14 @@ p {
   color: white;
 }
 
+.table-sorting th {
+  cursor: pointer
+}
+
+.table-sorting th:hover > p{
+  opacity: 0.6
+}
+
 @media(min-width: 530px) {
   .header-search {
     float: right;

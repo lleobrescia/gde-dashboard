@@ -1,0 +1,46 @@
+<div class="row prof-hearder">
+  <div class="col-xs-12">
+    <div class="form-group input-group input-title">
+      <label><a ui-sref="cardapio" rel="prev" title="Voltar">Cardápio</a></label>
+      <input type="text" class="form-control" name="nome" placeholder="Nome da Refeição" ng-model="cardapio.dado.Nome" ng-show="cardapio.state == 'cardapioAdicionar' || cardapio.edition">
+      <h1 class="page-header" ng-bind="cardapio.dado.Nome" ng-show="cardapio.state == 'cardapioDetails' && !cardapio.edition"></h1>
+      <span class="input-group-btn">
+				<button class="btn btn-outline btn-primary" type="button" ng-click="cardapio.Adicionar()" title="Adicionar Usuário" ng-show="cardapio.state == 'cardapioAdicionar'">
+					Adicionar
+				</button>
+        <div ng-show="cardapio.state == 'cardapioDetails' && cardapio.edition"> 
+          <button class="btn btn-outline btn-primary" type="button" ng-click="cardapio.Atualizar()" title="Salvar Alterações" >
+            Salvar
+          </button>
+          <button class="btn btn-outline btn-danger" type="button" ng-click="cardapio.CancelarEdicao()" title="Cancelar Alterações">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+        <button class="btn btn-outline btn-primary" type="button" ng-click="cardapio.edition = true" title="Editar Informações" ng-show="cardapio.state == 'cardapioDetails' && !cardapio.edition">
+					<i class="fa fa-pencil" aria-hidden="true"></i>
+				</button>
+			</span>
+    </div>
+    <!--form-group-->
+  </div>
+  <!--col xs 12-->
+</div>
+<!--row-->
+
+<div class="row" ng-show="cardapio.state == 'cardapioDetails' && !cardapio.edition">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <label for="cargo">Descrição</label>
+      <p class="form-control-static" ng-bind="cardapio.dado.Descricao"></p>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-show="cardapio.state == 'cardapioAdicionar' || cardapio.edition">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <label for="email">Descrição</label>
+      <textarea class="form-control" rows="5" ng-model="cardapio.dado.Descricao"></textarea>
+    </div>
+  </div>
+</div>
