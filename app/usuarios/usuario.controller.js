@@ -29,6 +29,7 @@
 
     self.Adicionar = Adicionar;
     self.Atualizar = Atualizar;
+    self.CancelarEdicao = CancelarEdicao;
     self.GetCargo = GetCargo;
 
     Activate();
@@ -53,6 +54,11 @@
         toastr.success('Alterações Salvas!');
         self.edition = false;
       });
+    }
+
+    function CancelarEdicao() {
+      self.dado = self.dadoAux;
+      self.edition = false;
     }
 
     function GetCargo(idGrupoUsuario) {
