@@ -5,11 +5,12 @@
     .module('dashboard')
     .controller('UsuarioController', UsuarioController);
 
-  UsuarioController.$inject = ['serverService', '$state'];
-  function UsuarioController(serverService, $state) {
+  UsuarioController.$inject = ['serverService', '$state', 'toastr'];
+  function UsuarioController(serverService, $state, toastr) {
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
 
+    self.edition = false;
     self.dado = {
       'Email': '',
       'IdGrupoUsuario': '',
@@ -24,6 +25,7 @@
       'ObjectID': '',
       'Id_Escola': idEscola
     };
+    self.state = $state.current.name;
 
     self.Adicionar = Adicionar;
     self.Atualizar = Atualizar;
@@ -48,7 +50,8 @@
 
     function Atualizar() {
       serverService.Request('AtualizarDadosUsuarioEscola', self.dado).then(function (resposta) {
-
+        toastr.success('Alterações Salvas!');
+        self.edition = false;
       });
     }
 
