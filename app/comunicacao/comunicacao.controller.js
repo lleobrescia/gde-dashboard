@@ -47,6 +47,8 @@
      * @memberOf Controllers.ComunicacaoController
      */
     function Enviar() {
+      var data = self.dado.Data.getUTCDate() + '/' + (self.dado.Data.getMonth() + 1) + '/' + self.dado.Data.getFullYear();
+      self.dado.Data = data;
       /**
        * Se todos as turmas forem selecionadas, nao ha necessidade de enviar para cada uma.
        * Basta enviar com o campo Id_Turma vazio.
