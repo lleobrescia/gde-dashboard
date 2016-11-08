@@ -1,6 +1,2 @@
-<div class="carregando" ng-show="aluno.carregando">
-	<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-	<span class="sr-only">Carregando...</span>
-</div>
-<div ng-include="'app/alunos/editar.html'" ng-show="aluno.editionEnable && !aluno.carregando" ng-cloak></div>
-<div ng-include="'app/alunos/visualizar.html'" ng-hide="aluno.editionEnable && !aluno.carregando" ng-cloak></div>
+<div ng-include="'app/alunos/editar.html'" ng-show="aluno.edition" ng-cloak></div>
+<div ng-include="'app/alunos/visualizar.html'" ng-hide="aluno.edition" ng-cloak></div>

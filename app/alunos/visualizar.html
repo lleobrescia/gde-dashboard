@@ -2,9 +2,9 @@
 	<div class="col-xs-12">
 		<div class="form-group input-group input-title">
 			<label><a ui-sref="alunos" rel="prev" title="Voltar">Alunos</a></label>
-			<h1 class="page-header" ng-bind="aluno.nome"></h1>
+			<h1 class="page-header" ng-bind="aluno.dado.Nome"></h1>
 			<span class="input-group-btn">
-				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.editionEnable = true" title="Editar Informações">
+				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.edition = true" title="Editar Informações">
 					<i class="fa fa-pencil" aria-hidden="true"></i>
 				</button>
 			</span>
@@ -17,8 +17,8 @@
 
 <section class="row">
 	<div class="col-xs-12 text-center">
-		<div ng-if="aluno.aluno.LinkFoto" class="img-thumbnail img-circle thumbnail-box thumbnail-box-lg" ng-style="{'background-image':'url({{aluno.aluno.LinkFoto}})'}"></div>
-		<div ng-if="!aluno.aluno.LinkFoto" class="thumbnail-user thumbnail-user-lg  img-thumbnail img-circle center-block">
+		<div ng-if="aluno.dado.LinkFoto" class="img-thumbnail img-circle thumbnail-box thumbnail-box-lg" ng-style="{'background-image':'url({{aluno.dado.LinkFoto}})'}"></div>
+		<div ng-if="!aluno.dado.LinkFoto" class="thumbnail-user thumbnail-user-lg  img-thumbnail img-circle center-block">
 			<i class="fa fa-user" aria-hidden="true"></i>
 		</div>
 	</div>
@@ -37,7 +37,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Matrícula</label>
-			<p class="form-control-static" ng-bind="aluno.matricula"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Matricula"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -45,7 +45,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Data de Nascimento</label>
-			<p class="form-control-static" ng-bind="aluno.dataNascimento"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Data_Nascimento"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -53,9 +53,8 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Gênero</label>
-
-			<p class="form-control-static" ng-if="aluno.genero == 'M'">Masculino</p>
-			<p class="form-control-static" ng-if="aluno.genero == 'F'">Feminino</p>
+			<p class="form-control-static" ng-if="aluno.dado.Sexo == 'M'">Masculino</p>
+			<p class="form-control-static" ng-if="aluno.dado.Sexo == 'F'">Feminino</p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -63,7 +62,7 @@
 </section>
 <!--row-->
 
-<section class="row" ng-if="aluno.aluno.Endereco">
+<section class="row" ng-if="aluno.dado.Endereco">
 	<div class="col-xs-12">
 		<h2 class="page-header">
 			Endereço
@@ -73,7 +72,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">CEP</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Cep"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Cep"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -81,7 +80,7 @@
 	<div class="col-sm-6">
 		<div class="form-group">
 			<label for="nascimento">Logradouro</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Endereco"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Endereco"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -89,7 +88,7 @@
 	<div class="col-sm-2">
 		<div class="form-group">
 			<label for="nascimento">Número</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Numero"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Numero"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -98,7 +97,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Bairro</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Bairro"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Bairro"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -106,7 +105,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Cidade</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Cidade"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Cidade"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -114,7 +113,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Estado</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Estado"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Estado"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -122,7 +121,7 @@
 </section>
 <!--row-->
 
-<section class="row" ng-if="aluno.aluno.NomeResponsavel1">
+<section class="row" ng-if="aluno.dado.NomeResponsavel1">
 	<div class="col-xs-12">
 		<h2 class="page-header">
 			Responsável
@@ -132,7 +131,7 @@
 	<div class="col-sm-8">
 		<div class="form-group">
 			<label for="nascimento">Nome</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.NomeResponsavel1"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.NomeResponsavel1"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -140,24 +139,24 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Filiação</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Afiliacao_Resp1"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Afiliacao_Resp1"></p>
 		</div>
 		<!--form-group-->
 	</div>
 	<!--col-sm-4-->
 
-	<div class="col-sm-4" ng-if="aluno.aluno.Telefone_Resp1">
+	<div class="col-sm-4" ng-if="aluno.dado.Telefone_Resp1">
 		<div class="form-group">
 			<label for="nascimento">Telefone</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Telefone_Resp1"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Telefone_Resp1"></p>
 		</div>
 		<!--form-group-->
 	</div>
 	<!--col-sm-4-->
-	<div class="col-sm-4" ng-if="aluno.aluno.Celular_Resp1">
+	<div class="col-sm-4" ng-if="aluno.dado.Celular_Resp1">
 		<div class="form-group">
 			<label for="nascimento">Celular</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Celular_Resp1"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Celular_Resp1"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -165,7 +164,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">E-mail</label>
-			<p class="form-control-static" ng-bind="aluno.emailResponsavel"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Email_Responsavel"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -173,7 +172,7 @@
 </section>
 <!--row-->
 
-<section class="row" ng-if="aluno.aluno.NomeResponsavel2">
+<section class="row" ng-if="aluno.dado.NomeResponsavel2">
 	<div class="col-xs-12">
 		<h2 class="page-header">
 			Responsável
@@ -183,7 +182,7 @@
 	<div class="col-sm-8">
 		<div class="form-group">
 			<label for="nascimento">Nome</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.NomeResponsavel2"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.NomeResponsavel2"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -191,24 +190,24 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Filiação</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Afiliacao_Resp2"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Afiliacao_Resp2"></p>
 		</div>
 		<!--form-group-->
 	</div>
 	<!--col-sm-4-->
 
-	<div class="col-sm-4" ng-if="aluno.aluno.Telefone_Resp1">
+	<div class="col-sm-4" ng-if="aluno.dado.Telefone_Resp1">
 		<div class="form-group">
 			<label for="nascimento">Telefone</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Telefone_Resp2"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Telefone_Resp2"></p>
 		</div>
 		<!--form-group-->
 	</div>
 	<!--col-sm-4-->
-	<div class="col-sm-4" ng-if="aluno.aluno.Celular_Resp1">
+	<div class="col-sm-4" ng-if="aluno.dado.Celular_Resp1">
 		<div class="form-group">
 			<label for="nascimento">Celular</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.Celular_Resp2"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Celular_Resp2"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -216,7 +215,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">E-mail</label>
-			<p class="form-control-static" ng-bind="aluno.emailResponsavel"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.Email_Responsavel"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -224,27 +223,27 @@
 </section>
 <!--row-->
 
-<section class="row" ng-if="aluno.aluno.RestricoesAlimentares || aluno.aluno.InformacoesMedicas">
+<section class="row" ng-if="aluno.dado.RestricoesAlimentares || aluno.dado.InformacoesMedicas">
 	<div class="col-xs-12">
 		<h2 class="page-header">
 			Restrições
 		</h2>
 
-		<div class="form-group" ng-if="aluno.aluno.RestricoesAlimentares">
+		<div class="form-group" ng-if="aluno.dado.RestricoesAlimentares">
 			<label for="nascimento">
 				<i class="fa fa-cutlery" aria-hidden="true" style="font-size: 1.4em;margin-right: 5px;"></i>
 				Restrição Alimentar
 			</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.RestricoesAlimentares"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.RestricoesAlimentares"></p>
 		</div>
 		<!--form-group-->
 
-		<div class="form-group" ng-if="aluno.aluno.InformacoesMedicas">
+		<div class="form-group" ng-if="aluno.dado.InformacoesMedicas">
 			<label for="nascimento">
 				<i class="fa fa-stethoscope" aria-hidden="true" style="font-size: 1.4em;margin-right: 5px;"></i> 
 				Informação Médica
 			</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.InformacoesMedicas"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.InformacoesMedicas"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -252,7 +251,7 @@
 </section>
 <!--row-->
 
-<section class="row" ng-if="aluno.aluno.NomeResponsavelBuscarAluno">
+<section class="row" ng-if="aluno.dado.NomeResponsavelBuscarAluno">
 	<div class="col-xs-12">
 		<h2 class="page-header">
 			Autorização
@@ -263,7 +262,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Autorizado(a) a buscar a criança</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.NomeResponsavelBuscarAluno"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.NomeResponsavelBuscarAluno"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -271,22 +270,22 @@
 	<div class="col-sm-2">
 		<div class="form-group">
 			<label for="nascimento">Parentesco</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.AfiliacaoResponsavelBuscarAluno"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.AfiliacaoResponsavelBuscarAluno"></p>
 		</div>
 		<!--form-group-->
 	</div>
-	<div class="col-sm-3" ng-if="aluno.aluno.TelefoneResponsavelBuscarAluno">
+	<div class="col-sm-3" ng-if="aluno.dado.TelefoneResponsavelBuscarAluno">
 		<div class="form-group">
 			<label for="nascimento">Telefone</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.TelefoneResponsavelBuscarAluno"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.TelefoneResponsavelBuscarAluno"></p>
 		</div>
 		<!--form-group-->
 	</div>
 	<!--col-sm-3-->
-	<div class="col-sm-3" ng-if="aluno.aluno.CelularResponsavelBuscarAluno">
+	<div class="col-sm-3" ng-if="aluno.dado.CelularResponsavelBuscarAluno">
 		<div class="form-group">
 			<label for="nascimento">Celular</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.CelularResponsavelBuscarAluno"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.CelularResponsavelBuscarAluno"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -294,7 +293,7 @@
 </section>
 <!--row-->
 
-<section class="row" ng-if="aluno.aluno.NomeResponsavelEmergencia">
+<section class="row" ng-if="aluno.dado.NomeResponsavelEmergencia">
 	<div class="col-xs-12">
 		<h2 class="page-header">
 			Emergência
@@ -304,7 +303,7 @@
 	<div class="col-sm-4">
 		<div class="form-group">
 			<label for="nascimento">Contato</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.NomeResponsavelEmergencia"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.NomeResponsavelEmergencia"></p>
 		</div>
 		<!--form-group-->
 	</div>
@@ -312,22 +311,22 @@
 	<div class="col-sm-2">
 		<div class="form-group">
 			<label for="nascimento">Parentesco</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.AfiliacaoResponsavelEmergencia"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.AfiliacaoResponsavelEmergencia"></p>
 		</div>
 		<!--form-group-->
 	</div>
-	<div class="col-sm-3" ng-if="aluno.aluno.TelefoneResponsavelEmergencia">
+	<div class="col-sm-3" ng-if="aluno.dado.TelefoneResponsavelEmergencia">
 		<div class="form-group">
 			<label for="nascimento">Telefone</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.TelefoneResponsavelEmergencia"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.TelefoneResponsavelEmergencia"></p>
 		</div>
 		<!--form-group-->
 	</div>
 	<!--col-sm-3-->
-	<div class="col-sm-3" ng-if="aluno.aluno.CelularResponsavelEmergencia">
+	<div class="col-sm-3" ng-if="aluno.dado.CelularResponsavelEmergencia">
 		<div class="form-group">
 			<label for="nascimento">Celular</label>
-			<p class="form-control-static" ng-bind="aluno.aluno.CelularResponsavelEmergencia"></p>
+			<p class="form-control-static" ng-bind="aluno.dado.CelularResponsavelEmergencia"></p>
 		</div>
 		<!--form-group-->
 	</div>
