@@ -20,6 +20,7 @@
     var self = this;
     var idEscola = '577ffe27e371b996be608a62';
 
+    self.avaliacoes = [];
     self.dadoAdicionar = {
       'Data_Nascimento': '',
       'Email_Responsavel': '',
@@ -37,18 +38,25 @@
     self.edition = true;
     self.emailResponsavel = '';
     self.genero = '';
-    self.idAluno = null;
+    self.graficos = [];
     self.matricula = '';
     self.nome = '';
     self.request = {
-      'ObjectID': self.idAluno,
+      'ObjectID': '',
       'Id_Escola': idEscola
+    };
+    self.requestAvaliacao = {
+      'Id_Escola': idEscola,
+      'Id_Turma': '',
+      'Id_Aluno': ''
     };
 
     self.AdicionarAluno = AdicionarAluno;
     self.Atualizar = Atualizar;
     self.CancelarEdicao = CancelarEdicao;
+    self.MountChart = MountChart;
 
+    // RetornarParecerDescritivoPedagogicoAluno
     Activate();
 
     ////////////////
@@ -98,6 +106,61 @@
       self.edition = false;
     }
 
+    function MountChart(lista) {
+      self.graficos = [];
+      angular.forEach(lista, function (resultado) {
+        var colors = [];
+        var count = 1;
+        var data = [];
+        var descricao = [];
+        var labels = [];
+        var nome = resultado.CampoExperiencia;
+
+        angular.forEach(resultado.Itens_Resultado_Avaliacao, function (campos) {
+          data.push(campos.Resposta_Value);
+          descricao.push(campos.Descricao);
+          labels.push('Atividade' + count);
+
+          switch (campos.Resposta_String) {
+            case 'Alcançado':
+              colors.push('rgb(0, 128, 0)');
+              break;
+            case 'Em processo':
+              colors.push('rgb(255, 255, 0)');
+              break;
+            case 'Acima do esperado':
+              colors.push('rgb(0, 0, 255)');
+              break;
+            case 'Não alcançado':
+              colors.push('rgb(255, 0, 255)');
+              break;
+            case 'Não avaliado':
+              colors.push('rgb(255, 0, 0)');
+              break;
+
+            default:
+              break;
+          }
+          count++;
+        });
+        self.graficos.push({
+          'nome': nome,
+          'labels': labels,
+          'data': data,
+          'dataset': {
+            'pointBackgroundColor': colors,
+            'pointBorderColor': colors,
+            'backgroundColor': 'rgba(35, 159, 219, 0.4)',
+            'borderColor': 'rgb(35, 159, 219)',
+            'pointBorderWidth': 10
+          },
+          'descricao': descricao
+        });
+      });
+
+      console.log(self.graficos);
+    }
+
     /**
     * @namespace GetAluno
     * @desc Pega as informacoes do aluno no servidor utilizando o id da url
@@ -114,7 +177,19 @@
         self.dadoAdicionar.SenhaAppPai = self.dado.SenhaAppPai;
         self.dadoAdicionar.Sexo = self.dado.Sexo;
 
-        console.log(self.dado);
+        GetAvaliacaoPedagogica();
+
+        // console.log(self.dado);
+      });
+    }
+
+    function GetAvaliacaoPedagogica() {
+      self.requestAvaliacao.Id_Aluno = self.request.ObjectID;
+      self.requestAvaliacao.Id_Turma = self.dado.Id_Turma;
+      // console.log(self.requestAvaliacao);
+      serverService.Request('RetornarDadosGraficosAvaliacaoPedagogica', self.requestAvaliacao).then(function (resp) {
+        self.avaliacoes = resp[0].ResultadoAvaliacoes;
+        console.log(self.avaliacoes);
       });
     }
   }

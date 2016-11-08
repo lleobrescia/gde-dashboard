@@ -333,3 +333,30 @@
 	<!--col-sm-3-->
 </section>
 <!--row-->
+
+<section class="row">
+	<div class="col-xs-12">
+
+		<h2 class="page-header">
+			Avaliações Pedagógica
+		</h2>
+
+		<table class="table table-striped">
+			<tbody>
+				<tr ng-repeat="avaliacao in aluno.avaliacoes" style="vertical-align: middle;text-align: center;cursor: pointer;">
+					<td ng-click="aluno.MountChart(avaliacao.Resultado_Avaliacao)">
+						<p style="margin-bottom:0" ng-bind="avaliacao.Nome"></p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+
+<section class="row">
+	<div class="col-xs-12">
+		<canvas class="chart chart-radar" chart-data="grafico.data" chart-labels="grafico.labels" chart-dataset-override="grafico.dataset" ng-repeat="grafico in aluno.graficos">
+		</canvas>
+	</div>
+</section>
