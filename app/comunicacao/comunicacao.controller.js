@@ -83,7 +83,7 @@
         'Id_Turma': '',
         'Msg': '',
         'Remetente': 'Escola',
-        'Tag': ''
+        'Tag': 'C'
       };
       self.turmasSelecionadas = [];
     }
