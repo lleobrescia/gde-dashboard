@@ -33,14 +33,9 @@
     };
     self.dado = [];
     self.dadoAux = [];
-    self.carregando = true;
-    self.dataNascimento = '';
     self.edition = true;
-    self.emailResponsavel = '';
-    self.genero = '';
     self.graficos = [];
-    self.matricula = '';
-    self.nome = '';
+    self.parecer = [];
     self.request = {
       'ObjectID': '',
       'Id_Escola': idEscola
@@ -55,9 +50,8 @@
     self.Atualizar = Atualizar;
     self.CancelarEdicao = CancelarEdicao;
     self.MountChart = MountChart;
-    self.SortByService = SortByService //servico usado no view
+    self.SortByService = SortByService; //servico usado no view
 
-    // RetornarParecerDescritivoPedagogicoAluno
     Activate();
 
     ////////////////
@@ -177,8 +171,6 @@
           'descricao': descricao
         });
       });
-
-      console.log(self.graficos);
     }
 
     /**
@@ -197,19 +189,23 @@
         self.dadoAdicionar.SenhaAppPai = self.dado.SenhaAppPai;
         self.dadoAdicionar.Sexo = self.dado.Sexo;
 
-        GetAvaliacaoPedagogica();
+        self.requestAvaliacao.Id_Aluno = self.request.ObjectID;
+        self.requestAvaliacao.Id_Turma = self.dado.Id_Turma;
 
-        // console.log(self.dado);
+        GetAvaliacaoPedagogica();
+        GetParecerDiscritivo();
       });
     }
 
     function GetAvaliacaoPedagogica() {
-      self.requestAvaliacao.Id_Aluno = self.request.ObjectID;
-      self.requestAvaliacao.Id_Turma = self.dado.Id_Turma;
-      // console.log(self.requestAvaliacao);
       serverService.Request('RetornarDadosGraficosAvaliacaoPedagogica', self.requestAvaliacao).then(function (resp) {
         self.avaliacoes = resp[0].ResultadoAvaliacoes;
-        console.log(self.avaliacoes);
+      });
+    }
+
+    function GetParecerDiscritivo() {
+      serverService.Request('RetornarParecerDescritivoPedagogicoAluno', self.requestAvaliacao).then(function (resp) {
+        self.parecer = resp;
       });
     }
   }

@@ -334,6 +334,56 @@
 </section>
 <!--row-->
 
+<section class="row" ng-if="">
+	<div class="col-xs-12">
+
+		<h2 class="page-header">
+			Parecer Descritivo
+		</h2>
+
+		<table class="table table-striped">
+			<tbody>
+				<thead>
+					<tr>
+						<th ng-click="aluno.SortByService.SortBy('Nome')" style="cursor:pointer">
+							<p>
+								Nome
+								<i class="fa" ng-class="
+                 {  'fa-sort' : aluno.SortByService.propertyName != 'Nome',
+                   'fa-sort-desc' : aluno.SortByService.propertyName === 'Nome' && aluno.SortByService.reverse,
+                   'fa-sort-asc' : aluno.SortByService.propertyName === 'Nome' && !aluno.SortByService.reverse}
+                  "></i>
+							</p>
+						</th>
+						<th ng-click="aluno.SortByService.SortBy('Data')" style="cursor:pointer">
+							<p>
+								Data
+								<i class="fa" ng-class="
+                 {  'fa-sort' : aluno.SortByService.propertyName != 'Data',
+                   'fa-sort-desc' : aluno.SortByService.propertyName === 'Data' && aluno.SortByService.reverse,
+                   'fa-sort-asc' : aluno.SortByService.propertyName === 'Data' && !aluno.SortByService.reverse}
+                  "></i>
+							</p>
+						</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="parecer in aluno.parecer | orderBy: aluno.SortByService.propertyName : aluno.SortByService.reverse" style="vertical-align: middle;">
+					<td ng-init="parecer.isCollapsed = true">
+						<p style="margin-bottom:0;cursor:pointer" ng-click="parecer.isCollapsed = ! parecer.isCollapsed"> nome</p>
+						<div uib-collapse="parecer.isCollapsed" style="padding: 5px;margin: 13px 0px;">
+							<p style="margin-bottom:0" ng-bind="parecer.Parecer"></p>
+						</div>
+					</td>
+					<td>
+						<p ng-bind="parecer.Data "></p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+
 <section class="row">
 	<div class="col-xs-12">
 
@@ -367,7 +417,8 @@
 						</th>
 					</tr>
 				</thead>
-				<tr ng-repeat="avaliacao in aluno.avaliacoes | orderBy: aluno.SortByService.propertyName : aluno.SortByService.reverse" style="vertical-align: middle;cursor: pointer;" ng-click="aluno.MountChart(avaliacao.Resultado_Avaliacao)">
+				<tr ng-repeat="avaliacao in aluno.avaliacoes | orderBy: aluno.SortByService.propertyName : aluno.SortByService.reverse" style="vertical-align: middle;cursor: pointer;"
+					ng-click="aluno.MountChart(avaliacao.Resultado_Avaliacao)">
 					<td>
 						<p style="margin-bottom:0" ng-bind="avaliacao.Nome"></p>
 					</td>
