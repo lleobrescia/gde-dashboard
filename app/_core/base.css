@@ -301,6 +301,10 @@ p {
   color: #000;
 }
 
+.table>thead>tr>th {
+  border-top: none
+}
+
 .table.table-striped tbody tr:hover > td h3, .table.table-striped tbody tr:hover > td a {
   color: white;
 }
@@ -309,7 +313,7 @@ p {
   cursor: pointer
 }
 
-.table-sorting th:hover > p{
+.table-sorting th:hover > p {
   opacity: 0.6
 }
 

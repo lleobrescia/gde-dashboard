@@ -343,9 +343,36 @@
 
 		<table class="table table-striped">
 			<tbody>
-				<tr ng-repeat="avaliacao in aluno.avaliacoes" style="vertical-align: middle;text-align: center;cursor: pointer;">
-					<td ng-click="aluno.MountChart(avaliacao.Resultado_Avaliacao)">
+				<thead>
+					<tr>
+						<th ng-click="aluno.SortByService.SortBy('Nome')" style="cursor:pointer">
+							<p>
+								Avaliação
+								<i class="fa" ng-class="
+                 {  'fa-sort' : aluno.SortByService.propertyName != 'Nome',
+                   'fa-sort-desc' : aluno.SortByService.propertyName === 'Nome' && aluno.SortByService.reverse,
+                   'fa-sort-asc' : aluno.SortByService.propertyName === 'Nome' && !aluno.SortByService.reverse}
+                  "></i>
+							</p>
+						</th>
+						<th ng-click="aluno.SortByService.SortBy('Data')" style="cursor:pointer">
+							<p>
+								Data
+								<i class="fa" ng-class="
+                 {  'fa-sort' : aluno.SortByService.propertyName != 'Data',
+                   'fa-sort-desc' : aluno.SortByService.propertyName === 'Data' && aluno.SortByService.reverse,
+                   'fa-sort-asc' : aluno.SortByService.propertyName === 'Data' && !aluno.SortByService.reverse}
+                  "></i>
+							</p>
+						</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="avaliacao in aluno.avaliacoes | orderBy: aluno.SortByService.propertyName : aluno.SortByService.reverse" style="vertical-align: middle;cursor: pointer;" ng-click="aluno.MountChart(avaliacao.Resultado_Avaliacao)">
+					<td>
 						<p style="margin-bottom:0" ng-bind="avaliacao.Nome"></p>
+					</td>
+					<td>
+						<p ng-bind="avaliacao.Data "></p>
 					</td>
 				</tr>
 			</tbody>
@@ -353,10 +380,49 @@
 	</div>
 </section>
 
-
-<section class="row">
+<div class="row" ng-if="aluno.graficos.length > 0">
 	<div class="col-xs-12">
-		<canvas class="chart chart-radar" chart-data="grafico.data" chart-labels="grafico.labels" chart-dataset-override="grafico.dataset" ng-repeat="grafico in aluno.graficos">
+		<h5>Legenda</h5>
+		<div class="legenda">
+			<ul>
+				<li>
+					<div class="cor" style="background: green;"></div>
+					<p>Alcançado</p>
+				</li>
+				<li>
+					<div class="cor" style="background: yellow;"></div>
+					<p>Em processo</p>
+				</li>
+				<li>
+					<div class="cor" style="background: blue;"></div>
+					<p>Acima do esperado</p>
+				</li>
+				<li>
+					<div class="cor" style="background: magenta;"></div>
+					<p>Não Alcançado</p>
+				</li>
+				<li>
+					<div class="cor" style="background: red;"></div>
+					<p>Não avaliado</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<section class="row graficos" ng-repeat="grafico in aluno.graficos">
+	<div class="col-xs-12">
+		<h3 ng-bind="grafico.nome" class="text-center"></h3>
+	</div>
+	<div class="col-md-6">
+		<canvas class="chart chart-radar" chart-data="grafico.data" chart-labels="grafico.labels" chart-dataset-override="grafico.dataset"
+			chart-options="grafico.options">
 		</canvas>
+	</div>
+	<div class="col-md-6">
+		<div ng-repeat="(key, value) in grafico.descricao" class="desc-box">
+			<h5><strong ng-bind="grafico.labels[{{key}}]"></strong> <small ng-bind="'( ' + grafico.respostas[{{key}}] + ' )' "></small></h5>
+			<p ng-bind="value"></p>
+		</div>
 	</div>
 </section>
