@@ -5,12 +5,14 @@
     .module('dashboard')
     .controller('TurmasController', TurmasController);
 
-  TurmasController.$inject = ['session', 'serverService'];
-  function TurmasController(session, serverService) {
+  TurmasController.$inject = ['session', 'serverService', '$state'];
+  function TurmasController(session, serverService, $state) {
     var idEscola = '577ffe27e371b996be608a62';
     var self = this;
 
     self.listaTurmas = [];
+
+    self.GoToTurma = GoToTurma;
 
     Activate();
 
@@ -37,6 +39,10 @@
         console.log(self.listaTurmas);
 
       });
+    }
+
+    function GoToTurma(idTurma) {
+      $state.go('turmasDetails', { idTurma: idTurma });
     }
   }
 })();

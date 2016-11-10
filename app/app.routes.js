@@ -82,16 +82,16 @@
         controllerAs: 'turmas',
         title: '- Lista de Turmas'
       })
-      .state('turmas.adicionar', {
-        url: '/adicionar',
+      .state('turmasAdicionar', {
+        url: '/turmas/adicionar',
         cache: false,
         templateUrl: 'app/turmas/turma.html',
         controller: 'TurmaController',
         controllerAs: 'turma',
         title: '- Adicionar Turma'
       })
-      .state('turmas.details', {
-        url: '/visualizar/:idTurma',
+      .state('turmasDetails', {
+        url: '/turmas/visualizar/:idTurma',
         cache: false,
         templateUrl: 'app/turmas/turma.html',
         controller: 'TurmaController',

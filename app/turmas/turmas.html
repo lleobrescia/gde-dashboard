@@ -2,7 +2,7 @@
 	<div class="col-xs-12">
 		<h1 class="page-header">
 			Turmas
-			<a class="btn btn-outline btn-primary" title="Adicionar Turma" href="turma">
+			<a class="btn btn-outline btn-primary" title="Adicionar Turma" ui-sref="turmasAdicionar">
 				<i class="fa fa-user-plus" aria-hidden="true"></i>
 			</a>
 			<div class="header-search">
@@ -20,7 +20,7 @@
 		<section class="table-responsive">
 			<table class="table table-striped turmas-lista">
 				<tbody>
-					<tr ng-repeat="turma in turmas.listaTurmas | filter:$scope.search | orderBy: 'Nome'" ng-click="turmas.GoToTurma(turma.Id)">
+					<tr ng-repeat="turma in turmas.listaTurmas | filter:$scope.search | orderBy: ['Nome','Ano']" ng-click="turmas.GoToTurma(turma.Id)">
 						<td class="text-center">
 							<h3 ng-bind="turma.Nome"></h3>
 						</td>
