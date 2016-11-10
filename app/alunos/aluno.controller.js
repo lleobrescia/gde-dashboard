@@ -142,8 +142,10 @@
             default:
               break;
           }
+
           count++;
         });
+
         self.graficos.push({
           'nome': nome,
           'labels': labels,
@@ -157,6 +159,14 @@
             'pointBorderWidth': 10
           },
           'options': {
+            tooltips: {
+              callbacks: {
+                label: function (data) {
+                  var retorno = respostas[data.index];
+                  return retorno;
+                }
+              }
+            },
             scale: {
               lineArc: true,
               ticks: {
@@ -164,7 +174,7 @@
                 beginAtZero: true,
                 min: 0,
                 max: 100,
-                fixedStepSize: 25
+                fixedStepSize: 20
               }
             }
           },
