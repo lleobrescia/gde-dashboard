@@ -305,7 +305,7 @@ p {
   border-top: none
 }
 
-.table.table-striped tbody tr:hover > td h3, .table.table-striped tbody tr:hover > td a {
+.table.table-striped tbody tr:hover > td h3, .table.table-striped tbody tr:hover > td a, .table.table-striped tbody tr:hover > h5 {
   color: white;
 }
 
