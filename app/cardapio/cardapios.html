@@ -10,7 +10,7 @@
 					<i class="fa fa-times" aria-hidden="true"></i>
       </button>
       <div class="header-search">
-        <input type="text" name="search" class="form-control" placeholder="Buscar" ng-model="$scope.search.Nome">
+        <input type="text" name="search" class="form-control" placeholder="Buscar" ng-model="$scope.search">
       </div>
       <!--header-search-->
     </h1>
@@ -46,11 +46,19 @@
                 </p>
               </th>
               <th>
-                <p>Dia <i class="fa fa-sort" aria-hidden="true"></i></p>
+                <select ng-model="$scope.diaFilter" class="form-control" style="border: none;box-shadow: none;">
+                  <option value="">Dia</option>
+                  <option value="Segunda">Segunda</option>
+                  <option value="Terça">Terça</option>
+                  <option value="Quarta">Quarta</option>
+                  <option value="Quinta">Quinta</option>
+                  <option value="Sexta">Sexta</option>
+                  <option value="Sábado">Sábado</option>
+                </select>
               </th>
             </tr>
           </thead>
-          <tr ng-repeat="cardapio in cardapios.cardapios | filter:$scope.search | orderBy: cardapios.SortByService.propertyName : cardapios.SortByService.reverse">
+          <tr ng-repeat="cardapio in cardapios.cardapios | filter:{'Nome':$scope.search} | filter:{'Dia':$scope.diaFilter} | orderBy: cardapios.SortByService.propertyName : cardapios.SortByService.reverse">
             <td style="cursor: pointer;" ng-click="cardapios.ListManagerService.Toggle(cardapio,cardapios.cardapiosSelecionados)">
               <p>
                 <i class="fa" ng-class="cardapios.ListManagerService.Exists(cardapio,cardapios.cardapiosSelecionados) ? 'fa-check-square-o' : 'fa-square-o'"
@@ -61,7 +69,7 @@
               <a ng-bind="cardapio.Nome" title="Editar" ui-sref="cardapioDetails( { idCardapio: cardapio.Id })" style="cursor: pointer;"></a>
             </td>
             <td>
-              <p ng-bind="cardapio.Data"></p>
+              <p ng-bind="cardapio.Dia"></p>
             </td>
           </tr>
         </tbody>
