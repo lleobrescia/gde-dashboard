@@ -3,6 +3,7 @@
 @import url('https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.1.1/angular-toastr.min.css');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/ng-img-crop/0.3.2/ng-img-crop.css');
 
 /**
 * GERAL
@@ -78,9 +79,9 @@ body {
   padding-top: 0;
 }
 
-.carregando.ng-enter.ng-enter-active{
-   padding-top: 25%;
-   height: 100%;
+.carregando.ng-enter.ng-enter-active {
+  padding-top: 25%;
+  height: 100%;
 }
 
 @media (min-width: 768px) {
