@@ -1,0 +1,16 @@
+<style>
+  .cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: 500px;
+    height: 350px;
+  }
+</style>
+<input type="file" id="logo">
+<div class="cropArea">
+  <img-crop image="escola.logo" result-image="escola.logoCortada" area-type="square" result-image-format="image/jpeg"></img-crop>
+</div>
+
+
+<div ng-click="escola.SalvarImagem()"><img ng-src="{{escola.logoCortada}}" /></div>
+

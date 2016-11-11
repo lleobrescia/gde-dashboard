@@ -162,6 +162,14 @@
         controller: 'CardapioController',
         controllerAs: 'cardapio',
         title: '- Informações Cardápio'
+      })
+      .state('escola', {
+        url: '/dados-da-escola',
+        cache: false,
+        templateUrl: 'app/dados-escola/dados-escola.html',
+        controller: 'EscolaController',
+        controllerAs: 'escola',
+        title: '- Informações da Escola'
       });
   }
 })();
