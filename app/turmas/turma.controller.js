@@ -20,6 +20,7 @@
       'Sigla': ''
     };
     self.dadoAux = [];
+    self.edition = false;
     self.professores = [];
     self.profSelecionado = null;
     self.request = {
@@ -45,13 +46,58 @@
       GetProfessores();
     }
 
-    function AdicionarTurma() {
-      serverService.Request('CadastrarTurma', self.dado).then(function (resp) {
-        var id = resp.Id;
+    function AdicionarAlunosATurma() {
+      var request = {
+        'Ano': self.dado.Ano,
+        'Id_Aluno': '',
+        'Id_Escola': idEscola,
+        'Id_Turma': self.request.ObjectID
+      };
+      angular.forEach(self.alunosSelecionados, function (item) {
+        if (!item.disabled) {
+          request.Id_Aluno = item.Id;
+
+          serverService.Request('AdicionarAlunoTurma', request).then(function (resp) {
+            item.disabled = true;
+          });
+        }
+      });
+      $state.go('turmas', { cadastro: 'OK' });
+    }
+
+    function AdicionarProfATurma() {
+      var request = {
+        'Ano': self.dado.Ano,
+        'Id_Escola': idEscola,
+        'Id_Professor': self.profSelecionado,
+        'Id_Turma': self.request.ObjectID
+      };
+      serverService.Request('AssociarProfessorTurma', request).then(function (resp) {
+        AdicionarAlunosATurma();
       });
     }
 
-    function Atualizar() { }
+    function AdicionarTurma() {
+      serverService.Request('CadastrarTurma', self.dado).then(function (resp) {
+        self.request.ObjectID = resp.Id;
+        AdicionarProfATurma();
+      });
+    }
+
+    function Atualizar() {
+      var request = {
+        'Ano': self.dado.Ano,
+        'Id_Escola': idEscola,
+        'Nome': self.dado.Nome,
+        'Serie': self.dado.Serie,
+        'Sigla': self.dado.Sigla,
+        'Id': self.dado.Id
+      };
+      serverService.Request('AtualizarDadosTurma', request).then(function (resp) {
+        self.edition = false;
+        toastr.success('Turma Atualizada');
+      });
+    }
 
     function CancelarEdicao() {
       self.dado = self.dadoAux;
@@ -65,6 +111,8 @@
       serverService.Request('RecuperarDadosTurmasEscola', self.request).then(function (resp) {
         self.dado = self.dadoAux = resp[0];
         self.profSelecionado = self.dado.Id_Professor;
+
+        console.log(self.dado);
       });
     }
 

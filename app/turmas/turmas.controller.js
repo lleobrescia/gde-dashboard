@@ -5,8 +5,8 @@
     .module('dashboard')
     .controller('TurmasController', TurmasController);
 
-  TurmasController.$inject = ['session', 'serverService', '$state'];
-  function TurmasController(session, serverService, $state) {
+  TurmasController.$inject = ['session', 'serverService', '$state', '$stateParams', 'toastr'];
+  function TurmasController(session, serverService, $state, $stateParams, toastr) {
     var idEscola = '577ffe27e371b996be608a62';
     var self = this;
 
@@ -19,6 +19,9 @@
     ////////////////
 
     function Activate() {
+      if ($stateParams.cadastro === 'OK') {
+        toastr.success('Turma Adicionado');
+      }
       GetTurmas();
     }
 

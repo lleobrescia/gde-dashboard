@@ -77,6 +77,9 @@
       .state('turmas', {
         url: '/turmas',
         cache: false,
+        params: {
+          cadastro: null
+        },
         templateUrl: 'app/turmas/turmas.html',
         controller: 'TurmasController',
         controllerAs: 'turmas',
