@@ -20,7 +20,8 @@
 		<section class="table-responsive">
 			<table class="table table-striped turmas-lista">
 				<tbody>
-					<tr ng-repeat="turma in turmas.listaTurmas | filter:$scope.search | orderBy: ['Nome','Ano']" ng-click="turmas.GoToTurma(turma.Id)">
+					<tr ng-repeat="turma in turmas.listaTurmas | filter:$scope.search | orderBy: ['Nome','Ano']" ng-click="turmas.GoToTurma(turma.Id)"
+						style="cursor:pointer">
 						<td class="text-center">
 							<h3 ng-bind="turma.Nome"></h3>
 						</td>
