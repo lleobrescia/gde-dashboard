@@ -170,6 +170,38 @@
         controller: 'EscolaController',
         controllerAs: 'escola',
         title: '- Informações da Escola'
+      })
+      .state('pedagogico', {
+        url: '/pedagogico',
+        cache: false,
+        params: {
+          cadastro: null,
+          idTurma: null
+        },
+        templateUrl: 'app/pedagogico/lista.html',
+        controller: 'ListaPedagogicoController',
+        controllerAs: 'pedagogico',
+        title: '- Modulo Pedagógico'
+      })
+      .state('pedagogicoAdicionar', {
+        url: '/pedagogico/adicionar',
+        cache: false,
+        templateUrl: 'app/pedagogico/pedagogico.html',
+        controller: 'PedagogicoController',
+        controllerAs: 'pedagogico',
+        title: '- Adicionar Novo Template'
+      })
+      .state('pedagogicoDetails', {
+        url: '/pedagogico/visualizar',
+        cache: false,
+        params: {
+          idTurma: null,
+          idAvaliacao: null
+        },
+        templateUrl: 'app/pedagogico/pedagogico.html',
+        controller: 'PedagogicoController',
+        controllerAs: 'pedagogico',
+        title: '- Informações'
       });
   }
 })();
