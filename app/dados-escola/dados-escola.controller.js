@@ -35,8 +35,9 @@
     self.logo = null;
     self.logoCortada = null;
 
-    self.SalvarImagem = SalvarImagem;
-    self.HandleFileSelect = HandleFileSelect;
+    self.Atualizar = Atualizar;
+    self.CancelarEdicao = CancelarEdicao;
+    self.UploadImage = UploadImage;
 
     Activate();
 
@@ -54,9 +55,27 @@
       });
     }
 
+    function CancelarEdicao() {
+      self.dado = self.dadoAux;
+      self.edition = false;
+    }
+
+    function DataURItoBlob(dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], {
+        type: mimeString
+      });
+    }
+
     function GetDados() {
-      serverService.Request('AtualizarDadosEscola', { 'ObjectID': idEscola }).then(function (resp) {
+      serverService.Request('RetornarDadosEscolas', { 'ObjectID': idEscola }).then(function (resp) {
         self.dado = self.dadoAux = resp[0];
+        console.log(self.dado);
       });
     }
 
@@ -70,22 +89,27 @@
         });
       };
       reader.readAsDataURL(file);
-
     }
-    function SalvarImagem() {
-      console.log(self.logoCortada);
-      // $http({
-      //   method: 'POST',
-      //   url: 'http://52.23.250.176/webservice/WebServiceGDE.svc/UploadLogoEscola?id_escola=' + idEscola,
-      //   transformRequest: RequestAsFormPost.TransformRequest,
-      //   headers: {
-      //     'Content-Type': 'application/x-www-form-urlencoded'
-      //   },
-      //   withCredentials: true,
-      //   data: { stream: self.logoCortada }
-      // }).then(function (resp) {
-      //   console.log(resp);
-      // });
+
+    function UploadImage() {
+      var fd = new FormData();
+      var imgBlob = DataURItoBlob(self.logoCortada);
+      fd.append('stream', imgBlob);
+      $http.post(
+        'http://52.23.250.176/webservice/WebServiceGDE.svc/UploadLogoEscola?id_escola=' + idEscola,
+        fd, {
+          transformRequest: angular.identity,
+          headers: {
+            'Content-Type': undefined
+          }
+        }
+      )
+        .success(function (response) {
+          console.log('success', response);
+        })
+        .error(function (response) {
+          console.log('error', response);
+        });
     }
   }
 })();
