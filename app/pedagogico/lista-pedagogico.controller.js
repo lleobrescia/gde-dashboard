@@ -25,6 +25,7 @@
     self.Apagar = Apagar;
     self.CancelarSelecao = CancelarSelecao;
     self.GetAvaliacoes = GetAvaliacoes;
+    self.GoToAvaliacao = GoToAvaliacao;
 
     Activate();
 
@@ -35,7 +36,7 @@
       if ($stateParams.idTurma) {
         GetAvaliacoes($stateParams.idTurma);
 
-        if ($stateParams.idCardapio) {
+        if ($stateParams.cadastro === 'OK') {
           toastr.success('Avaliação Cadastrada');
         }
       }
@@ -65,6 +66,10 @@
         self.turmas = resp;
         console.log(resp);
       });
+    }
+
+    function GoToAvaliacao(idAvaliacao) {
+      $state.go('pedagogicoDetails', { idAvaliacao: idAvaliacao, idTurma: self.requestAvaliacoes.Id_Turma });
     }
   }
 })();

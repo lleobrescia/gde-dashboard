@@ -186,6 +186,9 @@
       .state('pedagogicoAdicionar', {
         url: '/pedagogico/adicionar',
         cache: false,
+        params: {
+          idTurma: null
+        },
         templateUrl: 'app/pedagogico/pedagogico.html',
         controller: 'PedagogicoController',
         controllerAs: 'pedagogico',
