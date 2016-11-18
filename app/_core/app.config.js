@@ -19,6 +19,6 @@
   }
 
   function ConfigBlock($httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
+    // $httpProvider.defaults.withCredentials = true;
   }
 })();
