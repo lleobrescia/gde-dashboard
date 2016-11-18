@@ -1,19 +1,17 @@
 <nav class="navbar navbar-default navbar-static-top" ng-controller="HeaderController as Header">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+		</button>
 		<a class="navbar-brand" href="">Nome da Escola</a>
 	</div>
 	<!--navbar-header-->
 	<ul class="nav navbar-top-links navbar-right">
 		<li>
-			<a href="#">
-        Nome do Usuario
-			</a>
+			<a ui-sref="usuarioDetails( { idUsuario: Header.idUser })" ng-bind="Header.nomeUser"></a>
 		</li>
 		<li>
 			<a href="#">

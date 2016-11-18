@@ -20,6 +20,8 @@
     var self = this;
 
     self.IsActive = IsActive;
+    self.idUser = '581c92de6fef5abc9a496c9d';
+    self.nomeUser = 'Gladson Roberto';
 
     ////////////////
 
