@@ -24,7 +24,7 @@
     }
 
     function UploadImage(img, url) {
-      var retorno = 'Ok';
+      var retorno = true;
       var fd = new FormData();
       var imgBlob = DataURItoBlob(img);
       fd.append('stream', imgBlob);
@@ -37,13 +37,11 @@
           }
         }
       )
-        .success(function (response) {
-          toastr.success('Imagem enviada!');
-        })
         .error(function (response) {
           console.error(response);
-          toastr.error('Erro ao subir a imagem! Tente novamente mais tarde');
+          retorno = false;
         });
+      return retorno;
     }
   }
 })();

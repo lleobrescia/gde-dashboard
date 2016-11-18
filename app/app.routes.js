@@ -205,6 +205,42 @@
         controller: 'PedagogicoController',
         controllerAs: 'pedagogico',
         title: '- Informações'
+      })
+      .state('atividades', {
+        url: '/atividades-diarias',
+        cache: false,
+        params: {
+          cadastro: null,
+          idTurma: null
+        },
+        templateUrl: 'app/atividades-diarias/atividades-diarias.html',
+        controller: 'AtividadesController',
+        controllerAs: 'atividades',
+        title: '- Atividades Diárias'
+      })
+      .state('atividadesAdicionar', {
+        url: '/atividades-diarias/adicionar',
+        cache: false,
+        params: {
+          idTurma: null,
+          idAtividade: null
+        },
+        templateUrl: 'app/atividades-diarias/atividade-diaria.html',
+        controller: 'AtividadeController',
+        controllerAs: 'atividade',
+        title: '- Adicionar Cardápio'
+      })
+      .state('atividadesDetails', {
+        url: '/atividades-diarias/visualizar',
+        cache: false,
+        params: {
+          idTurma: null,
+          idAtividade: null
+        },
+        templateUrl: 'app/atividades-diarias/atividade-diaria.html',
+        controller: 'AtividadeController',
+        controllerAs: 'atividade',
+        title: '- Informações Cardápio'
       });
   }
 })();
