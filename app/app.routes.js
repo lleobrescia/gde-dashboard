@@ -12,8 +12,17 @@
     $locationProvider.html5Mode(true);
 
     $stateProvider
+      .state('login', {
+        url: '/login',
+        cache: false,
+        templateUrl: 'app/login/login.html',
+        controller: 'LoginController',
+        controllerAs: 'login',
+        title: '- Acessar o Dashboard',
+        isLogin: true
+      })
       .state('home', {
-        url: 'home',
+        url: '/home',
         cache: false,
         templateUrl: 'paginas/menu.html',
         controller: 'MenuController'
@@ -28,7 +37,8 @@
         templateUrl: 'app/alunos/alunos.html',
         controller: 'AlunosController',
         controllerAs: 'alunos',
-        title: '- Lista de Alunos'
+        title: '- Lista de Alunos',
+        isLogin: false
       })
       .state('alunosAdicionar', {
         url: '/alunos/adicionar',

@@ -84,6 +84,14 @@ body {
   height: 100%;
 }
 
+.pageLogin cabecalho {
+  display: none !important;
+}
+
+.pageLogin .page-wrapper {
+  margin: 0 !important;
+}
+
 @media (min-width: 768px) {
   .page-wrapper {
     position: inherit;
