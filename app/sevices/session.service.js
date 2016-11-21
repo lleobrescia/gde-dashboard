@@ -8,14 +8,14 @@
   session.$inject = ['$rootScope'];
   function session($rootScope) {
     var padrao = {
-      id: '577ffe27e371b996be608a62', // escola de exemplo.
-      listaAlunos: null,
-      listaTurmas: null,
-      listaProf: null
+      id: null, // escola de exemplo.
+      idEscola: null,
+      nome: null,
+      nomeEscola: null
     };
 
     var service = {
-      user: null,
+      user: padrao,
       SaveState: SaveState,
       RestoreState: RestoreState,
       Remove: Remove
@@ -36,11 +36,13 @@
     }
 
     function RestoreState() {
-      console.log('restorestate');
-      try {
-        service.user = angular.fromJson(sessionStorage.Session);
-      } catch (error) {
-        service.user = padrao;
+      console.log('RestoreState');
+      var dados = angular.fromJson(sessionStorage.Session);
+
+      if (dados === undefined) {
+        SaveState();
+      } else {
+        service.user = dados;
       }
     }
 
