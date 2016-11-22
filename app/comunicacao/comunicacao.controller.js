@@ -9,16 +9,16 @@
     .module('dashboard')
     .controller('ComunicacaoController', ComunicacaoController);
 
-  ComunicacaoController.$inject = ['serverService', 'toastr', 'ListManagerService'];
+  ComunicacaoController.$inject = ['serverService', 'toastr', 'ListManagerService', 'session'];
 
   /**
    * @namespace ComunicacaoController
    * @desc Envia menagens para uma ou mais turmas da escola
    * @memberOf Controllers
    */
-  function ComunicacaoController(serverService, toastr, ListManagerService) {
+  function ComunicacaoController(serverService, toastr, ListManagerService, session) {
     var self = this;
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;;
 
     self.dado = {};
     self.turmas = [];

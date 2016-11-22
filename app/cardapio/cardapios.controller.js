@@ -5,15 +5,16 @@
     .module('dashboard')
     .controller('CardapiosController', CardapiosController);
 
-  CardapiosController.$inject = ['serverService', 'toastr', 'ListManagerService', '$stateParams','SortByService'];
-  function CardapiosController(serverService, toastr, ListManagerService, $stateParams,SortByService) {
+  CardapiosController.$inject = ['serverService', 'toastr', 'ListManagerService', '$stateParams', 'SortByService', 'session'];
+  function CardapiosController(serverService, toastr, ListManagerService, $stateParams, SortByService, session) {
+    var idEscola = session.user.idEscola;
     var self = this;
 
     self.cardapios = [];
     self.cardapiosSelecionados = [];
     self.dados = {
       'ObjectID': '',
-      'Id_Escola': '577ffe27e371b996be608a62'
+      'Id_Escola': idEscola
     };
 
     self.DeleteCardapio = DeleteCardapio;

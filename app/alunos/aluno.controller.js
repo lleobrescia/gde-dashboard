@@ -18,7 +18,7 @@
   */
   function AlunoController(serverService, session, toastr, $state, SortByService) {
     var self = this;
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
 
     self.avaliacoes = [];
     self.dadoAdicionar = {

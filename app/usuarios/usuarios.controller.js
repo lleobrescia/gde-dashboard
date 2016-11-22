@@ -5,10 +5,10 @@
     .module('dashboard')
     .controller('UsuariosController', UsuariosController);
 
-  UsuariosController.$inject = ['serverService', 'toastr', 'ListManagerService', '$stateParams'];
-  function UsuariosController(serverService, toastr, ListManagerService, $stateParams) {
+  UsuariosController.$inject = ['serverService', 'toastr', 'ListManagerService', '$stateParams','session'];
+  function UsuariosController(serverService, toastr, ListManagerService, $stateParams,session) {
     var self = this;
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
 
     self.dado = {
       'ObjectID': '',

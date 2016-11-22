@@ -9,19 +9,23 @@
     .module('dashboard')
     .controller('HeaderController', HeaderController);
 
-  HeaderController.$inject = ['$location'];
+  HeaderController.$inject = ['$location', 'session','$state'];
 
   /**
   * @namespace HeaderController
   * @desc Controla os aspectos do cabecalho
   * @memberOf Controllers
   */
-  function HeaderController($location) {
+  function HeaderController($location, session,$state) {
     var self = this;
 
+    self.idUser = session.user.id;
+    self.nomeUser = session.user.nome;
+
     self.IsActive = IsActive;
-    self.idUser = '581c92de6fef5abc9a496c9d';
-    self.nomeUser = 'Gladson Roberto';
+    self.Sair = Sair;
+
+    console.log('start');
 
     ////////////////
 
@@ -30,11 +34,14 @@
     * @desc Verifica a pagina atual para adicionar a classe active ao menu
     * @memberOf Controllers.HeaderController
     */
-
-
     function IsActive(viewLocation) {
       var parent = $location.path().split('/');
       return viewLocation === parent[1];
+    }
+
+    function Sair() {
+      session.Remove();
+      $state.go('login');
     }
   }
 })();

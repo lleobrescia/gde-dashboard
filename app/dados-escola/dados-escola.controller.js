@@ -5,9 +5,9 @@
     .module('dashboard')
     .controller('EscolaController', EscolaController);
 
-  EscolaController.$inject = ['serverService', 'toastr', '$scope', '$http', 'RequestAsFormPost'];
-  function EscolaController(serverService, toastr, $scope, $http, RequestAsFormPost) {
-    var idEscola = '577ffe27e371b996be608a62';
+  EscolaController.$inject = ['serverService', 'toastr', '$scope', '$http', 'RequestAsFormPost', 'session'];
+  function EscolaController(serverService, toastr, $scope, $http, RequestAsFormPost, session) {
+    var idEscola = session.user.idEscola;
     var self = this;
 
     self.Atualizar = Atualizar;

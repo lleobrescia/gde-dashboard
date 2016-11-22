@@ -7,7 +7,7 @@
 
   AtividadesController.$inject = ['serverService', 'session', 'toastr', '$state', '$stateParams', 'ListManagerService'];
   function AtividadesController(serverService, session, toastr, $state, $stateParams, ListManagerService) {
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
     var self = this;
 
     self.atividades = [];

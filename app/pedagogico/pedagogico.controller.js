@@ -7,7 +7,7 @@
 
   PedagogicoController.$inject = ['serverService', 'session', '$state', '$stateParams', 'ListManagerService', 'toastr'];
   function PedagogicoController(serverService, session, $state, $stateParams, ListManagerService, toastr) {
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
     var self = this;
 
     self.camposExperiencia = [];

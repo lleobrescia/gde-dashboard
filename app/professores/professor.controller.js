@@ -18,7 +18,7 @@
   */
   function ProfessorController(serverService, session, toastr, $state) {
     var self = this;
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
 
     self.carregando = true;
     self.cpf = '';

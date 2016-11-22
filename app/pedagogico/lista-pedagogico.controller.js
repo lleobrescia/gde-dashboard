@@ -7,7 +7,7 @@
 
   ListaPedagogicoController.$inject = ['serverService', 'session', 'toastr', '$state', '$stateParams'];
   function ListaPedagogicoController(serverService, session, toastr, $state, $stateParams) {
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
     var self = this;
 
     self.avaliacoes = [];

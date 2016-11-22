@@ -7,7 +7,7 @@
 
   TurmasController.$inject = ['session', 'serverService', '$state', '$stateParams', 'toastr'];
   function TurmasController(session, serverService, $state, $stateParams, toastr) {
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
     var self = this;
 
     self.listaTurmas = [];

@@ -7,7 +7,7 @@
 
   AtividadeController.$inject = ['serverService', 'session', 'toastr', '$state', '$stateParams', 'UploadImgService', '$uibModal', '$scope'];
   function AtividadeController(serverService, session, toastr, $state, $stateParams, UploadImgService, $uibModal, $scope) {
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
     var self = this;
 
     self.dado = {

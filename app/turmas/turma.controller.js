@@ -5,9 +5,9 @@
     .module('dashboard')
     .controller('TurmaController', TurmaController);
 
-  TurmaController.$inject = ['serverService', 'toastr', '$state', 'ListManagerService'];
-  function TurmaController(serverService, toastr, $state, ListManagerService) {
-    var idEscola = '577ffe27e371b996be608a62';
+  TurmaController.$inject = ['serverService', 'toastr', '$state', 'ListManagerService', 'session'];
+  function TurmaController(serverService, toastr, $state, ListManagerService, session) {
+    var idEscola = session.user.idEscola;
     var self = this;
 
     self.alunos = [];

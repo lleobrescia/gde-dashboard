@@ -18,7 +18,7 @@
   */
   function ProfessoresController(serverService, session, toastr, $state, $stateParams) {
     var self = this;
-    var idEscola = '577ffe27e371b996be608a62';
+    var idEscola = session.user.idEscola;
 
     self.carregando = true;
     self.listaProf = [];
