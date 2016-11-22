@@ -24,8 +24,10 @@
       .state('home', {
         url: '/home',
         cache: false,
-        templateUrl: 'paginas/menu.html',
-        controller: 'MenuController'
+        templateUrl: 'app/home/home.html',
+        controller: 'HomeController',
+        controllerAs: 'home',
+        title: '- Nota e Anota',
       })
       .state('alunos', {
         url: '/alunos',
