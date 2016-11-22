@@ -39,7 +39,7 @@
       console.log('RestoreState');
       var dados = angular.fromJson(sessionStorage.Session);
 
-      if (dados === undefined) {
+      if (dados === undefined || dados === null) {
         SaveState();
       } else {
         service.user = dados;
@@ -47,7 +47,7 @@
     }
 
     function Remove() {
-      sessionStorage.Session = null;
+      sessionStorage.Session = angular.toJson(padrao);
       service.user = padrao;
     }
   }
