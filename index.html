@@ -64,7 +64,7 @@
 <body ng-class="loginClass">
 
 	<div class="wrapper">
-		<cabecalho></cabecalho>
+		<cabecalho ng-if="!isLogin"></cabecalho>
 		<section class="page-wrapper">
 			<div ui-view></div>
 		</section>

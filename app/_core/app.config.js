@@ -26,6 +26,7 @@
 
       if (toState.name === 'login') {
         $rootScope.loginClass = 'pageLogin';
+        $rootScope.isLogin = true;
 
         if (userAuthenticated) {
           event.preventDefault();
@@ -34,6 +35,7 @@
         }
       } else {
         $rootScope.loginClass = '';
+        $rootScope.isLogin = false;
       }
 
     }
