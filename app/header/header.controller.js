@@ -20,6 +20,7 @@
     var self = this;
 
     self.idUser = session.user.id;
+    self.nomeEscola = session.user.nomeEscola;
     self.nomeUser = session.user.nome;
 
     self.IsActive = IsActive;

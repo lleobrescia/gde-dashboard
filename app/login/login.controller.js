@@ -40,6 +40,7 @@
           session.user.id = resp.Id;
           session.user.idEscola = resp.Id_Escola;
           session.user.nome = resp.Nome;
+          session.user.nomeEscola = resp.Nome_Escola;
 
           GetNomeEscola(resp.Id_Escola);
 
