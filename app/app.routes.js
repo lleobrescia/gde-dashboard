@@ -253,6 +253,17 @@
         controller: 'AtividadeController',
         controllerAs: 'atividade',
         title: '- Informações Cardápio'
+      })
+      .state('calendario', {
+        url: '/calendario',
+        cache: false,
+        params: {
+          cadastro: null
+        },
+        templateUrl: 'app/calendario/calendario.html',
+        controller: 'CalendarioController',
+        controllerAs: 'calendario',
+        title: '- Calendário'
       });
   }
 })();
