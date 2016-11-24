@@ -2,15 +2,15 @@
   <div class="col-xs-12">
     <h1 class="page-header">
       Calendário
-      <a class="btn btn-outline btn-primary" title="Adicionar Usuário" ui-sref="usuarioAdicionar">
+      <a class="btn btn-outline btn-primary" title="Adicionar Item ao Calendário" ui-sref="calendarioAdicionar">
         <i class="fa fa-plus" aria-hidden="true"></i>
       </a>
-      <button class="btn btn-outline btn-danger" type="button" ng-click="calendario.Apagar()" title="Apagar Usuário(s)"
+      <button class="btn btn-outline btn-danger" type="button" ng-click="calendario.Apagar()" title="Apagar Item(ns)"
         ng-show="calendario.calendarioSelecionados.length > 0">
 					<i class="fa fa-times" aria-hidden="true"></i>
       </button>
       <div class="header-search">
-        <input type="text" name="search" class="form-control" placeholder="Buscar" ng-model="$scope.search.Nome">
+        <input type="text" name="search" class="form-control" placeholder="Buscar" ng-model="$scope.search">
       </div>
       <!--header-search-->
     </h1>
@@ -51,7 +51,7 @@
               </p>
             </td>
             <td>
-              <a ng-bind="item.Nome" title="Editar" ui-sref="usuarioDetails( { idUsuario: item.Id })" style="cursor: pointer;"></a>
+              <a ng-bind="item.Nome" title="Editar" ui-sref="calendarioDetails( { idCalendario: item.Id })" style="cursor: pointer;"></a>
             </td>
             <td>
               <p ng-bind="item.Data | date : 'dd/MM/yyyy'"></p>
