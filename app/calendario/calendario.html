@@ -3,10 +3,11 @@
     <h1 class="page-header">
       Calendário
       <a class="btn btn-outline btn-primary" title="Adicionar Usuário" ui-sref="usuarioAdicionar">
-        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        <i class="fa fa-plus" aria-hidden="true"></i>
       </a>
-      <button class="btn btn-outline btn-danger" type="button" ng-click="usuarios.DeleteUsuario()" title="Apagar Usuário(s)" ng-show="usuarios.usuariosSelecionados.length > 0">
-					<i class="fa fa-user-times" aria-hidden="true"></i>
+      <button class="btn btn-outline btn-danger" type="button" ng-click="calendario.Apagar()" title="Apagar Usuário(s)"
+        ng-show="calendario.calendarioSelecionados.length > 0">
+					<i class="fa fa-times" aria-hidden="true"></i>
       </button>
       <div class="header-search">
         <input type="text" name="search" class="form-control" placeholder="Buscar" ng-model="$scope.search.Nome">
@@ -26,11 +27,11 @@
           <thead>
             <tr>
               <th>
-                <p ng-click="usuarios.ListManagerService.ToggleAll(usuarios.usuariosSelecionados,usuarios.listUsuarios)" style="cursor: pointer;">
+                <p ng-click="calendario.ListManagerService.ToggleAll(calendario.calendarioSelecionados,calendario.calendario)" style="cursor: pointer;">
                   <i class="fa" ng-class="
-                 {  'fa-square-o' : usuarios.usuariosSelecionados.length === 0,
-                   'fa-minus-square-o' : usuarios.ListManagerService.IsIndeterminate(usuarios.usuariosSelecionados,usuarios.listUsuarios),
-                   'fa-check-square-o' : usuarios.usuariosSelecionados.length === usuarios.listUsuarios.length}
+                 {  'fa-square-o' : calendario.calendarioSelecionados.length === 0,
+                   'fa-minus-square-o' : calendario.ListManagerService.IsIndeterminate(calendario.calendarioSelecionados,calendario.calendario),
+                   'fa-check-square-o' : calendario.calendarioSelecionados.length === calendario.calendario.length}
                   "></i>
                 </p>
               </th>
@@ -38,28 +39,22 @@
                 <p>Nome</p>
               </th>
               <th>
-                <p>E-mail</p>
-              </th>
-              <th>
-                <p>Cargo</p>
+                <p>Data</p>
               </th>
             </tr>
           </thead>
-          <tr ng-repeat="usuario in usuarios.listUsuarios | filter:$scope.search | orderBy: 'Nome'">
-            <td style="cursor: pointer;" ng-click="usuarios.ListManagerService.Toggle(usuario,usuarios.usuariosSelecionados)">
+          <tr ng-repeat="item in calendario.calendario | filter:$scope.search | orderBy: ['Data','Nome']">
+            <td style="cursor: pointer;" ng-click="calendario.ListManagerService.Toggle(item,calendario.calendarioSelecionados)">
               <p>
-                <i class="fa" ng-class="usuarios.ListManagerService.Exists(usuario,usuarios.usuariosSelecionados) ? 'fa-check-square-o' : 'fa-square-o'"
+                <i class="fa" ng-class="calendario.ListManagerService.Exists(item,calendario.calendarioSelecionados) ? 'fa-check-square-o' : 'fa-square-o'"
                   aria-hidden="true"></i>
               </p>
             </td>
             <td>
-              <a ng-bind="usuario.Nome" title="Editar" ui-sref="usuarioDetails( { idUsuario: usuario.Id })" style="cursor: pointer;"></a>
+              <a ng-bind="item.Nome" title="Editar" ui-sref="usuarioDetails( { idUsuario: item.Id })" style="cursor: pointer;"></a>
             </td>
             <td>
-              <p ng-bind="usuario.Email"></p>
-            </td>
-            <td>
-              <p ng-bind="usuarios.GetCargo(usuario.IdGrupoUsuario)"></p>
+              <p ng-bind="item.Data | date : 'dd/MM/yyyy'"></p>
             </td>
           </tr>
         </tbody>
