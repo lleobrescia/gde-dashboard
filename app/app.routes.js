@@ -264,6 +264,22 @@
         controller: 'CalendarioController',
         controllerAs: 'calendario',
         title: '- Calendário'
+      })
+      .state('calendarioAdicionar', {
+        url: '/calendario/adicionar',
+        cache: false,
+        templateUrl: 'app/calendario/item.html',
+        controller: 'ItemCalendarioController',
+        controllerAs: 'item',
+        title: '- Adicionar Item ao Calendário'
+      })
+      .state('calendarioDetails', {
+        url: '/calendario/visualizar/:idCalendario',
+        cache: false,
+        templateUrl: 'app/calendario/item.html',
+        controller: 'ItemCalendarioController',
+        controllerAs: 'item',
+        title: '- Informações Calendário'
       });
   }
 })();
