@@ -25,6 +25,39 @@
 <!--row-->
 
 <div class="row">
+  <div class="col-xs-12">
+    <div class="upload-foto"  ng-hide="escola.img || escola.recortou" style="margin-bottom: 30px;">
+      <input id="img" type="file" accept="image/*">
+      <i class="fa fa-camera" aria-hidden="true"></i>
+    </div>
+    <div class="cropArea" ng-show="escola.img && !escola.recortou">
+      <img-crop image="escola.img" result-image="escola.imgCortada" area-type="square" result-image-format="'image/jpeg'"></img-crop>
+    </div>
+    <div ng-if="escola.img && !escola.recortou">
+      <button class="btn btn-outline btn-primary" type="button" title="Recortar Imagem" ng-click="escola.recortou = true;escola.Recortar()"
+        style="margin: 20px 0 40px;">
+        Recortar
+      </button>
+      <button class="btn btn-outline btn-danger" type="button" title="Recortar Imagem" ng-click="escola.recortou = true;escola.CancelarRecorte()"
+        style="margin: 20px 0 40px;">
+        Cancelar
+      </button>
+    </div>
+
+    <img ng-src="{{escola.imgCortada}}" style="margin: 30px auto;display: block;cursor: pointer;" ng-click="escola.recortou = false; escola.img = null" ng-show="escola.recortou">
+
+  </div>
+</div>
+<style>
+  .cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: 100%;
+    padding: 5px;
+    height: 500px;
+  }
+</style>
+<div class="row">
   <div class="col-sm-5 col-md-4">
     <div class="form-group">
       <label for="cep">CEP</label>
