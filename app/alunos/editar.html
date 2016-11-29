@@ -4,13 +4,13 @@
 			<label><a ui-sref="alunos" rel="prev" title="Voltar">Alunos</a></label>
 			<input type="text" class="form-control" name="nome" placeholder="Nome do(a) Aluno(a)" ng-model="aluno.dadoAdicionar.Nome">
 			<span class="input-group-btn">
-				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.AdicionarAluno()" title="Adicionar Aluno" ng-if="!aluno.request.ObjectID">
+				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.Adicionar()" title="Adicionar Aluno" ng-if="!aluno.request.ObjectID">
 					Adicionar
 				</button>
 				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.SalvarEdicao();aluno.edition = false" title="Salvar Alterações" ng-show="aluno.request.ObjectID">
 					Salvar
 				</button>
-				<button class="btn btn-outline btn-danger" type="button" ng-click="aluno.CancelarEdicao();aluno.edition = false" title="Cancelar Alterações" ng-show="aluno.request.ObjectID">
+				<button class="btn btn-outline btn-danger" type="button" ng-click="aluno.Cancelar();aluno.edition = false" title="Cancelar Alterações" ng-show="aluno.request.ObjectID">
 					<i class="fa fa-times" aria-hidden="true"></i>
 				</button>
 			</span>

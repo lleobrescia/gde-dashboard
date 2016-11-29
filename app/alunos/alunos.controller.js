@@ -17,14 +17,18 @@
 	* @memberOf Controllers
 	*/
   function AlunosController(serverService, session, toastr, $state, $stateParams) {
-    var self = this;
-    var idEscola = session.user.idEscola;
+    var idEscola  = session.user.idEscola;
+    var self      = this;
 
-    self.carregando = true;
-    self.listaAlunos = [];
+    self.carregando   = true;
+    self.listaAlunos  = [];
 
-    self.ApagarAluno = ApagarAluno;
-    self.GoToAluno = GoToAluno;
+    /**
+     * Funcoes usadas no view
+     */
+
+    self.ApagarAluno  = ApagarAluno;
+    self.GoToAluno    = GoToAluno;
 
     Activate();
 
@@ -36,9 +40,9 @@
 		* @memberOf Controllers.AlunosController
 		*/
     function Activate() {
-      GetAlunos();
+      GetDados();
       // if (session.user.listaAlunos === null) {
-      //   GetAlunos();
+      //   GetDados();
       // } else {
       //   self.listaAlunos = session.user.listaAlunos;
       // }
@@ -56,46 +60,22 @@
 		* @memberOf Controllers.AlunosController
 		*/
     function ApagarAluno(index, alunoId) {
-      var endpoint = {
-        'ObjectID': alunoId
-      };
-      var josonRequest = 'ExcluirAluno';
-
       self.listaAlunos.splice(index, 1);
       session.user.listaAlunos = self.listaAlunos;
 
       session.SaveState();
 
-      serverService.Request(endpoint, josonRequest);
+      serverService.Request('ExcluirAluno',  { 'ObjectID': alunoId });
     }
 
     /**
-		* @namespace GetAlunos
+		* @namespace GetDados
 		* @desc Pega todos os alunos do servidor
 		* @memberOf Controllers.AlunosController
 		*/
-    function GetAlunos() {
-      var endpoint = 'RecuperarDadosAlunosEscola';
-      /**
-      * Enviando os campos Id_Turma e Id_Aluno em branco
-      * retorna todos os alunos
-      */
-      var josonRequest = {
-        'ObjectID': '',
-        'Id_Escola': idEscola
-      };
-
-      //Envia o endpoint com o json de request para o servidor e espera a resposta (promise)
-      serverService.Request(endpoint, josonRequest).then(function (resp) {
-        /**
-			  * A resposta eh um string em formato json
-			  * Eh preciso passar para json object
-			  */
+    function GetDados() {
+      serverService.Request('RecuperarDadosAlunosEscola', { 'ObjectID'  : '', 'Id_Escola' : idEscola }).then(function (resp) {
         self.listaAlunos = resp;
-
-        // session.user.listaAlunos = self.listaAlunos;
-
-        // session.SaveState();
       });
     }
 

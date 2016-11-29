@@ -17,40 +17,44 @@
   * @memberOf Controllers
   */
   function AlunoController(serverService, session, toastr, $state, SortByService) {
-    var self = this;
-    var idEscola = session.user.idEscola;
+    var idEscola  = session.user.idEscola;
+    var self      = this;
 
-    self.avaliacoes = [];
-    self.dadoAdicionar = {
-      'Data_Nascimento': '',
-      'Email_Responsavel': '',
-      'Excluido': false,
-      'Id_Escola': idEscola,
-      'Matricula': '',
-      'Nome': '',
-      'SenhaAppPai': '',
-      'Sexo': ''
+    self.avaliacoes     = [];
+    self.dadoAdicionar  = {
+      'Data_Nascimento'   : '',
+      'Email_Responsavel' : '',
+      'Excluido'          : false,
+      'Id_Escola'         : idEscola,
+      'Matricula'         : '',
+      'Nome'              : '',
+      'SenhaAppPai'       : '',
+      'Sexo'              : ''
     };
-    self.dado = [];
-    self.dadoAux = [];
-    self.edition = true;
+    self.dado     = [];
+    self.dadoAux  = []; // usado para quando cancelar as modificacoes
+    self.edition  = true;
     self.graficos = [];
-    self.parecer = [];
-    self.request = {
-      'ObjectID': '',
-      'Id_Escola': idEscola
+    self.parecer  = [];
+    self.request  = {
+      'ObjectID'  : '',
+      'Id_Escola' : idEscola
     };
     self.requestAvaliacao = {
-      'Id_Escola': idEscola,
-      'Id_Turma': '',
-      'Id_Aluno': ''
+      'Id_Escola' : idEscola,
+      'Id_Turma'  : '',
+      'Id_Aluno'  : ''
     };
 
-    self.AdicionarAluno = AdicionarAluno;
-    self.Atualizar = Atualizar;
-    self.CancelarEdicao = CancelarEdicao;
-    self.MountChart = MountChart;
-    self.SortByService = SortByService; //servico usado no view
+    /**
+     * Funcoes usadas no view
+     */
+
+    self.Adicionar      = Adicionar;
+    self.Atualizar      = Atualizar;
+    self.Cancelar       = Cancelar;
+    self.MountChart     = MountChart;
+    self.SortByService  = SortByService; //servico usado no view
 
     Activate();
 
@@ -64,17 +68,18 @@
     function Activate() {
       if ($state.params.idAluno) {
         self.request.ObjectID = $state.params.idAluno;
-        self.edition = false;
-        GetAluno();
+        self.edition          = false;
+
+        GetDados();
       }
     }
 
     /**
-    * @namespace AdicionarAluno
+    * @namespace Adicionar
     * @desc Adiciona o aluno e envia a senha para o responsavel
     * @memberOf Controllers.AlunoController
     */
-    function AdicionarAluno() {
+    function Adicionar() {
       serverService.Request('CadastrarAluno', self.dadoAdicionar).then(function (resp) {
         $state.go('alunos', { cadastro: 'OK' });
       });
@@ -92,24 +97,31 @@
     }
 
     /**
-    * @namespace CancelarEdicao
+    * @namespace Cancelar
     * @desc Cancela as alteracoes feitas pelo usuario
     * @memberOf Controllers.AlunoController
     */
-    function CancelarEdicao() {
-      self.dado = self.dadoAux;
-      self.edition = false;
+    function Cancelar() {
+      self.dado     = self.dadoAux;
+      self.edition  = false;
     }
 
+    /**
+    * @namespace MountChart
+    * @desc Monta os graficos radar para as avaliacoes
+		* @param {array} lista - lista com os valores das avaliacoes
+    * @memberOf Controllers.AlunoController
+    */
     function MountChart(lista) {
       self.graficos = [];
+
       angular.forEach(lista, function (resultado) {
-        var colors = [];
-        var count = 1;
-        var data = [];
+        var colors    = [];
+        var count     = 1; //Usado para escrever o numero da atividade
+        var data      = [];
         var descricao = [];
-        var labels = [];
-        var nome = resultado.CampoExperiencia;
+        var labels    = [];//nomes dos marcadores no grafico
+        var nome      = resultado.CampoExperiencia;
         var respostas = [];
 
         angular.forEach(resultado.Itens_Resultado_Avaliacao, function (campos) {
@@ -147,16 +159,16 @@
         });
 
         self.graficos.push({
-          'nome': nome,
-          'labels': labels,
-          'respostas': respostas,
-          'data': data,
-          'dataset': {
+          'nome'      : nome,
+          'labels'    : labels,
+          'respostas' : respostas,
+          'data'      : data,
+          'dataset'   : {
             'pointBackgroundColor': colors,
-            'pointBorderColor': colors,
-            'backgroundColor': 'rgba(35, 159, 219, 0.4)',
-            'borderColor': 'rgb(35, 159, 219)',
-            'pointBorderWidth': 10
+            'pointBorderColor'    : colors,
+            'backgroundColor'     : 'rgba(35, 159, 219, 0.4)',
+            'borderColor'         : 'rgb(35, 159, 219)',
+            'pointBorderWidth'    : 10
           },
           'options': {
             tooltips: {
@@ -170,11 +182,11 @@
             scale: {
               lineArc: true,
               ticks: {
-                display: false,
-                beginAtZero: true,
-                min: 0,
-                max: 100,
-                fixedStepSize: 20
+                display       : false,
+                beginAtZero   : true,
+                min           : 0,
+                max           : 100,
+                fixedStepSize : 20
               }
             }
           },
@@ -184,20 +196,31 @@
     }
 
     /**
-    * @namespace GetAluno
+    * @namespace GetAvaliacaoPedagogica
+    * @desc Pega as informacoes das avaliacoes pedagogicas do aluno
+    * @memberOf Controllers.AlunoController
+    */
+    function GetAvaliacaoPedagogica() {
+      serverService.Request('RetornarDadosGraficosAvaliacaoPedagogica', self.requestAvaliacao).then(function (resp) {
+        self.avaliacoes = resp[0].ResultadoAvaliacoes;
+      });
+    }
+
+    /**
+    * @namespace GetDados
     * @desc Pega as informacoes do aluno no servidor utilizando o id da url
     * @memberOf Controllers.AlunoController
     */
-    function GetAluno() {
+    function GetDados() {
       serverService.Request('RecuperarDadosAlunosEscola', self.request).then(function (resp) {
         self.dado = self.dadoAux = resp[0];
 
-        self.dadoAdicionar.Data_Nascimento = self.dado.Data_Nascimento;
-        self.dadoAdicionar.Email_Responsavel = self.dado.Email_Responsavel;
-        self.dadoAdicionar.Matricula = self.dado.Matricula;
-        self.dadoAdicionar.Nome = self.dado.Nome;
-        self.dadoAdicionar.SenhaAppPai = self.dado.SenhaAppPai;
-        self.dadoAdicionar.Sexo = self.dado.Sexo;
+        self.dadoAdicionar.Data_Nascimento    = self.dado.Data_Nascimento;
+        self.dadoAdicionar.Email_Responsavel  = self.dado.Email_Responsavel;
+        self.dadoAdicionar.Matricula          = self.dado.Matricula;
+        self.dadoAdicionar.Nome               = self.dado.Nome;
+        self.dadoAdicionar.SenhaAppPai        = self.dado.SenhaAppPai;
+        self.dadoAdicionar.Sexo               = self.dado.Sexo;
 
         self.requestAvaliacao.Id_Aluno = self.request.ObjectID;
         self.requestAvaliacao.Id_Turma = self.dado.Id_Turma;
@@ -207,12 +230,11 @@
       });
     }
 
-    function GetAvaliacaoPedagogica() {
-      serverService.Request('RetornarDadosGraficosAvaliacaoPedagogica', self.requestAvaliacao).then(function (resp) {
-        self.avaliacoes = resp[0].ResultadoAvaliacoes;
-      });
-    }
-
+    /**
+    * @namespace GetParecerDiscritivo
+    * @desc Pega as informacoes do parecer discritivo do aluno
+    * @memberOf Controllers.AlunoController
+    */
     function GetParecerDiscritivo() {
       serverService.Request('RetornarParecerDescritivoPedagogicoAluno', self.requestAvaliacao).then(function (resp) {
         self.parecer = resp;
