@@ -21,32 +21,32 @@
     var self = this;
 
     self.dado = {
-      'Ano'       : '',
-      'Descricao' : '',
-      'Id_Escola' : idEscola,
-      'Id_Turma'  : '',
-      'Nome'      : ''
+      'Ano': '',
+      'Descricao': '',
+      'Id_Escola': idEscola,
+      'Id_Turma': '',
+      'Nome': ''
     };
-    self.dadoAux          = [];
-    self.descricao        = '';
-    self.edition          = false;
-    self.id               = null;
-    self.imgTurma         = null; //imagem enviada pelo usuario
-    self.imgTurmaCortada  = null; //imagem depois do crop
-    self.recortou         = false;
+    self.dadoAux = [];
+    self.descricao = '';
+    self.edition = false;
+    self.id = null;
+    self.imgTurma = null; //imagem enviada pelo usuario
+    self.imgTurmaCortada = null; //imagem depois do crop
+    self.recortou = false;
     self.requestAtividades = {
-      'Id_Escola' : idEscola,
-      'Id_Turma'  : '',
-      'Ano'       : ''
+      'Id_Escola': idEscola,
+      'Id_Turma': '',
+      'Ano': ''
     };
 
     /**
      * Funcoes usadas no view
      */
 
-    self.Adicionar  = Adicionar;
-    self.Atualizar  = Atualizar;
-    self.Cancelar   = Cancelar;
+    self.Adicionar = Adicionar;
+    self.Atualizar = Atualizar;
+    self.Cancelar = Cancelar;
 
     Activate();
 
@@ -82,16 +82,20 @@
     * @memberOf Controllers.AtividadeController
     */
     function Adicionar() {
-      serverService.Request('CadastrarTemplateAtividadesDiarias', self.dado).then(function (resp) {
-        /**
-         * Recebe o id da atividade adicionada para fazer o upload da imagem da atividade
-         * o upload eh feito atraves do servico UploadImgService
-         */
-        var url = 'http://52.23.250.176/webservice/WebServiceGDE.svc/UploadFotoTemplateAtividadeDiaria?id_escola=' + idEscola + '&id_atividade=' + resp.Id;
-        var result = UploadImgService.UploadImage(self.imgTurmaCortada, url);
+      if (!self.imgTurmaCortada) {
+        toastr.error('É preciso adicionar uma imagem');
+      } else {
+        serverService.Request('CadastrarTemplateAtividadesDiarias', self.dado).then(function (resp) {
+          /**
+           * Recebe o id da atividade adicionada para fazer o upload da imagem da atividade
+           * o upload eh feito atraves do servico UploadImgService
+           */
+          var url = 'http://52.23.250.176/webservice/WebServiceGDE.svc/UploadFotoTemplateAtividadeDiaria?id_escola=' + idEscola + '&id_atividade=' + resp.Id;
+          var result = UploadImgService.UploadImage(self.imgTurmaCortada, url);
 
-        $state.go('atividades', { cadastro: 'OK', idTurma: self.dado.Id_Turma });
-      });
+          $state.go('atividades', { cadastro: 'OK', idTurma: self.dado.Id_Turma });
+        });
+      }
     }
 
     /**
@@ -112,10 +116,10 @@
     * @memberOf Controllers.AtividadeController
     */
     function Cancelar() {
-      self.dado             = self.dadoAux;
-      self.imgTurmaCortada  = self.dadoAux.Url_Foto;
-      self.recortou         = true;
-      self.edition          = false;
+      self.dado = self.dadoAux;
+      self.imgTurmaCortada = self.dadoAux.Url_Foto;
+      self.recortou = true;
+      self.edition = false;
     }
 
     /**
@@ -127,9 +131,9 @@
       serverService.Request('RetornarTemplateAtividadesDiariasTurma', self.requestAtividades).then(function (resp) {
         angular.forEach(resp, function (item) {
           if (item.Id === self.id) {
-            self.dado             = self.dadoAux = item;
-            self.imgTurmaCortada  = item.Url_Foto;
-            self.recortou         = true;
+            self.dado = self.dadoAux = item;
+            self.imgTurmaCortada = item.Url_Foto;
+            self.recortou = true;
           }
         });
       });
@@ -141,8 +145,8 @@
     * @memberOf Controllers.AtividadeController
     */
     function HandleFileSelect(evt) {
-      var file    = evt.currentTarget.files[0];
-      var reader  = new FileReader();
+      var file = evt.currentTarget.files[0];
+      var reader = new FileReader();
 
       reader.onload = function (evt) {
         $scope.$apply(function () {

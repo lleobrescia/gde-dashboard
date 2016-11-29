@@ -16,8 +16,8 @@
   * @memberOf Services
   */
   function serverService($q, $http, RequestAsFormPost) {
-    var token = '1234567';
-    var appid = '1234567';
+    var token = '8393af8a0acf0ffdcbd3b10cd48a7161';
+    var appid = '3f0c5b90337fa79f57f96dd2753c6e06';
 
     var service = {
       Request: Request

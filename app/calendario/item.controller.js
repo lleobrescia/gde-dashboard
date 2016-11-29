@@ -16,7 +16,7 @@
       'Id_Escola': idEscola,
       'Nome': '',
       'Obs': '',
-      'Tag': ''
+      'Tag': 'C'
     };
     self.dadoAux = [];
     self.edition = false;

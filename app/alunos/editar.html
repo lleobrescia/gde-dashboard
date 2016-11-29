@@ -1,35 +1,36 @@
-<div class="row aluno-hearder">
-	<div class="col-xs-12">
-		<div class="form-group input-group input-title">
-			<label><a ui-sref="alunos" rel="prev" title="Voltar">Alunos</a></label>
-			<input type="text" class="form-control" name="nome" placeholder="Nome do(a) Aluno(a)" ng-model="aluno.dadoAdicionar.Nome">
-			<span class="input-group-btn">
-				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.Adicionar()" title="Adicionar Aluno" ng-if="!aluno.request.ObjectID">
+<form name="adicionarForm">
+	<div class="row aluno-hearder">
+		<div class="col-xs-12">
+			<div class="form-group input-group input-title">
+				<label><a ui-sref="alunos" rel="prev" title="Voltar">Alunos</a></label>
+				<input type="text" class="form-control" name="nome" placeholder="Nome do(a) Aluno(a)" ng-model="aluno.dadoAdicionar.Nome"
+					required>
+				<span class="input-group-btn">
+				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.Adicionar()" title="Adicionar Aluno" ng-if="!aluno.request.ObjectID" ng-disabled="adicionarForm.$invalid">
 					Adicionar
 				</button>
-				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.SalvarEdicao();aluno.edition = false" title="Salvar Alterações" ng-show="aluno.request.ObjectID">
+				<button class="btn btn-outline btn-primary" type="button" ng-click="aluno.SalvarEdicao();aluno.edition = false" title="Salvar Alterações" ng-show="aluno.request.ObjectID" ng-disabled="adicionarForm.$invalid">
 					Salvar
 				</button>
 				<button class="btn btn-outline btn-danger" type="button" ng-click="aluno.Cancelar();aluno.edition = false" title="Cancelar Alterações" ng-show="aluno.request.ObjectID">
 					<i class="fa fa-times" aria-hidden="true"></i>
 				</button>
 			</span>
+			</div>
+			<!--form-group-->
 		</div>
-		<!--form-group-->
+		<!--col xs 12-->
 	</div>
-	<!--col xs 12-->
-</div>
-<!--row-->
+	<!--row-->
 
-<div class="row">
-	<div class="col-xs-12">
-		<h2 class="page-header">
-			Dados da matrícula
-		</h2>
-	</div>
-	<!--col-xs-12-->
+	<div class="row">
+		<div class="col-xs-12">
+			<h2 class="page-header">
+				Dados da matrícula
+			</h2>
+		</div>
+		<!--col-xs-12-->
 
-	<form name="adicionarForm">
 		<div class="col-sm-6 col-md-3">
 			<div class="form-group">
 				<label for="nascimento">Data de Nascimento</label>
@@ -61,7 +62,7 @@
 				<input type="text" name="matricula" class="form-control" ng-model="aluno.dadoAdicionar.Matricula" required>
 			</div>
 		</div>
-	</form>
-	<!--adicionarForm-->
-</div>
-<!--row-->
+	</div>
+	<!--row-->
+</form>
+<!--adicionarForm-->

@@ -47,6 +47,11 @@
      * @memberOf Controllers.ComunicacaoController
      */
     function Enviar() {
+      if (self.turmasSelecionadas.length === 0) {
+        toastr.error('Selecione pelo menos uma turma!');
+        return;
+      }
+
       var data = self.dado.Data.getUTCDate() + '/' + (self.dado.Data.getMonth() + 1) + '/' + self.dado.Data.getFullYear();
       self.dado.Data = data;
       /**

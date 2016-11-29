@@ -89,6 +89,11 @@
     }
 
     function Adicionar() {
+      if (self.dado.Questionario.lenght === 0) {
+        toastr.error('Adicione, ao menos, um campo de experiência');
+        return;
+      }
+
       angular.forEach(self.questionario, function (item) {
         delete item.show;
       });

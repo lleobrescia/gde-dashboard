@@ -13,6 +13,7 @@
     self.dado = {
       'Data': '',
       'Descricao': '',
+      'Dia': null,
       'Id_Escola': idEscola,
       'Nome': '',
       'ValorPadrao': ''
@@ -41,6 +42,11 @@
     }
 
     function Adicionar() {
+      if (!self.dado.Dia) {
+        toastr.error('Por favor, adicione um dia da semana');
+
+        return;
+      }
       var date = new Date();
       date = date.getUTCDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
 

@@ -33,9 +33,8 @@
     }
 
     function DeleteCardapio() {
-      angular.forEach(self.cardapiosSelecionado, function (item) {
-        serverService.Request('RemoverUsuarioEscola', { ObjectID: item.Id }).then(function (resposta) {
-
+      angular.forEach(self.cardapiosSelecionados, function (item) {
+        serverService.Request('RemoverTemplateCardapio', { ObjectID: item.Id }).then(function (resposta) {
         });
       });
       toastr.success('Cardápio Apagado');
