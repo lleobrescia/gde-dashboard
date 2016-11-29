@@ -3,7 +3,7 @@
     <div class="col-xs-12">
       <div class="form-group input-group input-title">
         <label><a ui-sref="turmas" rel="prev" title="Voltar">Turmas</a></label>
-        <input type="text" class="form-control" name="nome" placeholder="Nome da Turma" ng-model="turma.dado.Nome" ng-if="request.ObjectID || turma.edition" required>
+        <input type="text" class="form-control" name="nome" placeholder="Nome da Turma" ng-model="turma.dado.Nome" ng-if="!turma.request.ObjectID || turma.edition" required>
         <h1 class="page-header" ng-bind="turma.dado.Nome" ng-if="turma.request.ObjectID && !turma.edition"></h1>
 
         <span class="input-group-btn">

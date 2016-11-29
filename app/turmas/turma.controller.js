@@ -62,7 +62,6 @@
           });
         }
       });
-      $state.go('turmas', { cadastro: 'OK' });
     }
 
     function AdicionarProfATurma() {
@@ -74,6 +73,7 @@
       };
       serverService.Request('AssociarProfessorTurma', request).then(function (resp) {
         AdicionarAlunosATurma();
+        $state.go('turmas', { cadastro: 'OK' });
       });
     }
 
@@ -94,6 +94,11 @@
         'Id': self.dado.Id
       };
       serverService.Request('AtualizarDadosTurma', request).then(function (resp) {
+
+        if (self.alunosSelecionados.length > 0) {
+          AdicionarAlunosATurma();
+        }
+
         self.edition = false;
         toastr.success('Turma Atualizada');
       });
