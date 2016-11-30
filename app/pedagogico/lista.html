@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
-    <div class="form-group" style="margin-bottom: -22px;" ng-if="pedagogico.requestAvaliacoes.Id_Turma" ng-click="pedagogico.CancelarSelecao()">
-      <label>Lista Turmas</label>
+    <div class="form-group" style="margin-bottom: -22px;cursor:pointer" ng-if="pedagogico.requestAvaliacoes.Id_Turma" ng-click="pedagogico.CancelarSelecao()">
+      <label style="cursor:pointer">Lista Turmas</label>
     </div>
     <h1 class="page-header">
       Pedagógico
@@ -9,7 +9,7 @@
         ng-if="pedagogico.requestAvaliacoes.Id_Turma">
         <i class="fa fa-plus" aria-hidden="true"></i>
       </a>
-      <div class="header-search">
+      <div class="header-search" ng-if="!pedagogico.requestAvaliacoes.Id_Turma">
         <input type="text" name="search" class="form-control" placeholder="Buscar" ng-model="$scope.search">
       </div>
       <!--header-search-->
@@ -54,7 +54,7 @@
               </th>
             </tr>
           </thead>
-          <tr ng-repeat="avalicao in pedagogico.avaliacoes | orderBy: 'DataCadastro'" style="cursor:pointer" ng-click="pedagogico.GoToAvaliacao(avalicao.Id)">
+          <tr ng-repeat="avalicao in pedagogico.avaliacoes | orderBy: ['Nome','DataCadastro']" style="cursor:pointer" ng-click="pedagogico.GoToAvaliacao(avalicao.Id)">
             <td>
               <h3 ng-bind="avalicao.Nome"></h3>
             </td>

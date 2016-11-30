@@ -5,13 +5,12 @@
     .module('dashboard')
     .controller('PedagogicoController', PedagogicoController);
 
-  PedagogicoController.$inject = ['serverService', 'session', '$state', '$stateParams', 'ListManagerService', 'toastr'];
-  function PedagogicoController(serverService, session, $state, $stateParams, ListManagerService, toastr) {
+  PedagogicoController.$inject = ['serverService', 'session', '$state', '$stateParams', 'toastr', '$filter'];
+  function PedagogicoController(serverService, session, $state, $stateParams, toastr, $filter) {
     var idEscola = session.user.idEscola;
     var self = this;
 
     self.camposExperiencia = [];
-    self.campoSelecionado = null;
     self.dado = {
       'DataCadastro': '',
       'Descricao': '',
@@ -23,10 +22,9 @@
     };
     self.grupoEtario = [];
     self.nomeGrupoEtario = null;
-    self.nomeTurma = null;
     self.objetivoAprendizagem = [];
     self.questionario = [];
-    self.turma = [];
+    self.turma = null;
     self.requestAvaliacoes = {
       'Id_Escola': idEscola,
       'Id_Turma': '',
@@ -38,11 +36,9 @@
     };
 
     self.Adicionar = Adicionar;
-    self.AdicionarCampoExperiencia = AdicionarCampoExperiencia;
     self.GetNomeCampoExperiencia = GetNomeCampoExperiencia;
     self.GetNomeObjetivo = GetNomeObjetivo;
-    self.ListManagerService = ListManagerService; //servico usado no view
-    self.RemoverCampoExperiencia = RemoverCampoExperiencia;
+    self.ToggleObjetivo = ToggleObjetivo;
 
     Activate();
 
@@ -68,36 +64,11 @@
       }
     }
 
-    function AdicionarCampoExperiencia() {
-      var possui = false;
-
-      angular.forEach(self.questionario, function (item) {
-        if (item.CampoExperiencia === self.campoSelecionado) {
-          toastr.error('Campo de Experiência já adicionado!');
-          possui = true;
-        }
-      });
-
-      if (!possui) {
-        self.questionario.push({
-          'CampoExperiencia': self.campoSelecionado,
-          'ObjetivoAprendizagem': [],
-          'show': true
-        });
-      }
-      self.campoSelecionado = null;
-    }
-
     function Adicionar() {
-      if (self.dado.Questionario.lenght === 0) {
-        toastr.error('Adicione, ao menos, um campo de experiência');
-        return;
-      }
+      var data = new Date();
+      var cadastro = $filter('date')(data, 'dd/MM/yyyy');
 
-      angular.forEach(self.questionario, function (item) {
-        delete item.show;
-      });
-
+      self.dado.DataCadastro = cadastro;
       self.dado.Questionario = self.questionario;
       serverService.Request('CadastrarAvaliacaoPedagogica', self.dado).then(function (resp) {
         $state.go('pedagogico', { cadastro: 'OK', idTurma: self.requestAvaliacoes.Id_Turma });
@@ -114,6 +85,10 @@
         if (self.dado.Id_SubGrupoEtario) {
           GetNomeGrupoEtario(self.dado.Id_SubGrupoEtario);
         }
+
+        angular.forEach(self.objetivoAprendizagem, function (item) {
+          item.selected = false;
+        });
 
         console.log(resp);
       });
@@ -164,8 +139,51 @@
       });
     }
 
-    function RemoverCampoExperiencia(index) {
-      self.questionario.splice(index, 1);
+    function ToggleObjetivo(experiencia, objetivo) {
+      var hasExperiencia = false;//para verificar se ja existe a experiencia
+
+      angular.forEach(self.questionario, function (item, index) {
+
+        //Se a experiencia ja existe, so adiciona o objetivo
+        if (item.CampoExperiencia === experiencia) {
+          var hasObjetivo = false;// para verificar se ja existe o objetivo
+          hasExperiencia = true;//confirma a existencia da experiencia
+
+          //Verificacao da existencia do objetivo
+          angular.forEach(item.ObjetivoAprendizagem, function (value, key) {
+            //Se existe, entao remove do array
+            if (value === objetivo) {
+              item.ObjetivoAprendizagem.splice(key, 1);
+              hasObjetivo = true;//confirmacao da existencia do objetivo
+            }
+          });
+
+          //Se nao existe o objetivo, entao adiciona
+          if (!hasObjetivo) {
+            item.ObjetivoAprendizagem.push(objetivo);
+          } else if (hasObjetivo) {
+            //Verifica se todos os objetivos foram retirados, para remover a experiencia
+            if (item.ObjetivoAprendizagem.length === 0) {
+              self.questionario.splice(index, 1);
+            }
+          }
+        }
+      });
+
+      /**
+       * Adiciona experiencia e o objetivo ao questionario
+       * caso a experiencia nao exista
+       */
+      if (!hasExperiencia) {
+        self.questionario.push({
+          'CampoExperiencia': experiencia,
+          'ObjetivoAprendizagem': [
+            objetivo
+          ]
+        });
+      }
+
+      console.log(self.questionario);
     }
   }
 })();
