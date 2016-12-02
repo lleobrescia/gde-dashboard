@@ -3,8 +3,8 @@
     <div class="col-xs-12">
       <div class="form-group input-group input-title">
         <label><a ui-sref="professores" rel="prev" title="Voltar">Professores</a></label>
-        <input type="text" class="form-control" name="nome" placeholder="Nome do(a) Professor(a)" ng-model="prof.nome" ng-show="!prof.idProf || prof.enableEdition" required>
-        <h1 class="page-header" ng-bind="prof.nome" ng-show="prof.idProf && !prof.enableEdition"></h1>
+        <input type="text" class="form-control" name="nome" placeholder="Nome do(a) Professor(a)" ng-model="prof.dado.Nome" ng-show="!prof.idProf || prof.enableEdition" required>
+        <h1 class="page-header" ng-bind="prof.dado.Nome" ng-show="prof.idProf && !prof.enableEdition"></h1>
         <span class="input-group-btn">
 				<button class="btn btn-outline btn-primary" type="button" ng-click="prof.AdicionarProf()" title="Adicionar Professor" ng-if="!prof.idProf" ng-disabled="adicionarForm.$invalid">
 					Adicionar
@@ -31,8 +31,8 @@
       <div ng-class="prof.idProf ?'col-sm-6' : 'col-sm-4' ">
         <div class="form-group">
           <label for="email">E-mail</label>
-          <input type="email" name="email" class="form-control" ng-model="prof.email" ng-show="!prof.idProf || prof.enableEdition" required>
-          <p class="form-control-static" ng-bind="prof.email" ng-show="prof.idProf && !prof.enableEdition"></p>
+          <input type="email" name="email" class="form-control" ng-model="prof.dado.Email" ng-show="!prof.idProf || prof.enableEdition" required>
+          <p class="form-control-static" ng-bind="prof.dado.Email" ng-show="prof.idProf && !prof.enableEdition"></p>
         </div>
         <!--form-group-->
       </div>
@@ -40,7 +40,7 @@
       <div class="col-sm-4" ng-if="!prof.idProf">
         <div class="form-group">
           <label for="senha">Senha</label>
-          <input type="text" name="senha" class="form-control" ng-model="prof.senha" required>
+          <input type="text" name="senha" class="form-control" ng-model="prof.dado.Senha" required>
         </div>
         <!--form-group-->
       </div>
@@ -48,8 +48,8 @@
       <div ng-class="prof.idProf ?'col-sm-6' : 'col-sm-4' ">
         <div class="form-group">
           <label for="cpf">CPF</label>
-          <input type="text" name="cpf" class="form-control" ng-model="prof.cpf" ng-show="!prof.idProf || prof.enableEdition" mask="999.999.999-99">
-          <p class="form-control-static" ng-bind="prof.cpf" ng-show="prof.idProf && !prof.enableEdition"></p>
+          <input type="text" name="cpf" class="form-control" ng-model="prof.dado.Cpf" ng-show="!prof.idProf || prof.enableEdition" mask="999.999.999-99">
+          <p class="form-control-static" ng-bind="prof.dado.Cpf" ng-show="prof.idProf && !prof.enableEdition"></p>
         </div>
         <!--form-group-->
       </div>

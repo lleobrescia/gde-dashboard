@@ -17,17 +17,22 @@
   * @memberOf Controllers
   */
   function ProfessorController(serverService, session, toastr, $state) {
-    var self = this;
     var idEscola = session.user.idEscola;
+    var self = this;
 
     self.carregando = true;
-    self.cpf = '';
-    self.email = '';
+    self.dado = {
+      'Email': '',
+      'Excluido': false,
+      'IdGrupoUsuario': 0,
+      'Nome': '',
+      'Senha': '',
+      'Cpf': '',
+      'Id_Escola': idEscola
+    };
+    self.dadoAux = [];
     self.enableEdition = false;
     self.idProf = null;
-    self.nome = '';
-    self.prof = [];
-    self.senha = '';
 
     self.AdicionarProf = AdicionarProf;
     self.CancelarEdicao = CancelarEdicao;
@@ -58,19 +63,9 @@
     * @memberOf Controllers.ProfessorController
     */
     function AdicionarProf() {
-      var endpoint = 'CadastrarUsuarioProfessor';
-      var josonRequest = {
-        'Email': self.email,
-        'IdGrupoUsuario': 0,
-        'Nome': self.nome,
-        'Senha': self.senha,
-        'Cpf': self.cpf,
-        'Id_Escola': idEscola
-      };
-
       self.carregando = true;
 
-      serverService.Request(endpoint, josonRequest).then(function (resp) {
+      serverService.Request('CadastrarUsuarioProfessor', self.dado).then(function (resp) {
         console.log(resp);
         $state.go('professores', { cadastro: 'OK' });
       });
@@ -82,10 +77,7 @@
     * @memberOf Controllers.ProfessorController
     */
     function CancelarEdicao() {
-      self.email = self.prof.Email;
-      self.nome = self.prof.Nome;
-      self.cpf = self.prof.Cpf;
-      self.senha = self.prof.Senha;
+      self.dado = self.dadoAux;
     }
 
     /**
@@ -94,25 +86,9 @@
     * @memberOf Controllers.ProfessorController
     */
     function GetProf() {
-      var endpoint = 'RecuperarDadosProfessoresEscola';
-      var josonRequest = {
-        'ObjectID': self.idProf,
-        'Id_Escola': idEscola
-      };
-
-      serverService.Request(endpoint, josonRequest).then(function (resp) {
-        self.prof = resp[0];
-
-        if (self.prof === undefined) {
-          //tratar erro
-        } else {
-          self.carregando = false;
-
-          CancelarEdicao();
-        }
+      serverService.Request('RecuperarDadosProfessoresEscola', { 'ObjectID': self.idProf, 'Id_Escola': idEscola }).then(function (resp) {
+        self.dado = self.dadoAux = resp[0];
         console.log(self.prof);
-
-        // session.SaveState();
       });
     }
 
@@ -122,17 +98,7 @@
     * @memberOf Controllers.ProfessorController
     */
     function SalvarEdicao() {
-      var endpoint = 'AtualizarDadosProfessor';
-      var josonRequest = {
-        'Email': self.email,
-        'IdGrupoUsuario': self.prof.IdGrupoUsuario,
-        'Nome': self.nome,
-        'Senha': self.senha,
-        'Cpf': self.cpf,
-        'Id_Escola': idEscola
-      };
-
-      serverService.Request(endpoint, josonRequest).then(function (resp) {
+      serverService.Request('AtualizarDadosProfessor', self.dado).then(function (resp) {
         console.log(resp);
         toastr.success('Dados Salvos!');
       });
