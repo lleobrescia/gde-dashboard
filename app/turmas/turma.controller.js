@@ -29,6 +29,7 @@
     };
 
     self.AdicionarTurma = AdicionarTurma;
+    self.Atualizar = Atualizar;
     self.CancelarEdicao = CancelarEdicao;
     self.FilterAlunos = FilterAlunos;
     self.ListManagerService = ListManagerService; //Servico usado na view
@@ -53,6 +54,7 @@
         'Id_Escola': idEscola,
         'Id_Turma': self.request.ObjectID
       };
+      console.log(self.alunosSelecionados);
       angular.forEach(self.alunosSelecionados, function (item) {
         if (!item.disabled) {
           request.Id_Aluno = item.Id;

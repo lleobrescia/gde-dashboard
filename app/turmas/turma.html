@@ -10,7 +10,7 @@
 				<button class="btn btn-outline btn-primary" type="button" ng-click="turma.AdicionarTurma()" title="Adicionar Turma" ng-if="!turma.request.ObjectID" ng-disabled="adicionarForm.$invalid">
 					Adicionar
 				</button>
-				<button class="btn btn-outline btn-primary" type="button" ng-click="turma.SalvarEdicao();turma.edition = false" title="Salvar Alterações" ng-if="turma.request.ObjectID && turma.edition" ng-disabled="adicionarForm.$invalid">
+				<button class="btn btn-outline btn-primary" type="button" ng-click="turma.Atualizar();turma.edition = false" title="Salvar Alterações" ng-if="turma.request.ObjectID && turma.edition" ng-disabled="adicionarForm.$invalid">
 					Salvar
 				</button>
 				<button class="btn btn-outline btn-danger" type="button" ng-click="turma.CancelarEdicao();turma.edition = false" title="Cancelar Alterações" ng-if="turma.request.ObjectID && turma.edition">
